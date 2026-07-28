@@ -1,6 +1,6 @@
 import type { Content } from "@/lib/content";
 
-export default function Hero({ t }: { t: Content }) {
+export default function Hero({ t, onBook }: { t: Content; onBook: () => void }) {
   return (
     <section id="top" className="hero">
       <div className="hero__blobs" aria-hidden="true">
@@ -18,9 +18,9 @@ export default function Hero({ t }: { t: Content }) {
         </h1>
         <p className="hero__sub">{t.heroSub}</p>
         <div className="hero__actions">
-          <a href="#kontakt" className="btn-primary">
+          <button type="button" onClick={onBook} className="btn-primary">
             {t.ctaPrimary}
-          </a>
+          </button>
           <a href="#sluzby" className="hero__secondary">
             {t.heroSecondary}
           </a>

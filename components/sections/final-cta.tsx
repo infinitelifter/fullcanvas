@@ -2,7 +2,7 @@ import type { Content } from "@/lib/content";
 import Logo from "@/components/logo";
 import Reveal from "@/components/reveal";
 
-export default function FinalCta({ t }: { t: Content }) {
+export default function FinalCta({ t, onBook }: { t: Content; onBook: () => void }) {
   return (
     <section id="kontakt" className="final-cta">
       <div className="final-cta__glow" aria-hidden="true" />
@@ -12,9 +12,9 @@ export default function FinalCta({ t }: { t: Content }) {
           <h2 className="final-cta__title">{t.finalHeadline}</h2>
           <p className="final-cta__body">{t.finalBody}</p>
           <div className="final-cta__actions">
-            <a href={`mailto:${t.email}`} className="btn-light">
+            <button type="button" onClick={onBook} className="btn-light">
               {t.ctaPrimary}
-            </a>
+            </button>
             <a href={`mailto:${t.email}`} className="final-cta__email">
               {t.email}
             </a>

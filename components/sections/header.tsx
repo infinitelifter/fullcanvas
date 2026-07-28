@@ -5,10 +5,12 @@ export default function Header({
   t,
   lang,
   onLangChange,
+  onBook,
 }: {
   t: Content;
   lang: Lang;
   onLangChange: (lang: Lang) => void;
+  onBook: () => void;
 }) {
   return (
     <header className="site-header">
@@ -24,9 +26,9 @@ export default function Header({
         <a href="#top" aria-label="Full Canvas Digital" className="site-header__logo">
           <Logo />
         </a>
-        <a href="#kontakt" className="btn-header">
+        <button type="button" onClick={onBook} className="btn-header">
           {t.ctaShort}
-        </a>
+        </button>
       </div>
     </header>
   );

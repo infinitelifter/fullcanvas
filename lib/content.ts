@@ -33,6 +33,29 @@ export interface FaqItem {
   a: string;
 }
 
+export interface FormCopy {
+  title: string;
+  subtitle: string;
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  phoneOptional: string;
+  message: string;
+  messagePlaceholder: string;
+  submit: string;
+  sending: string;
+  successTitle: string;
+  successBody: string;
+  errorTitle: string;
+  errorBody: string;
+  errorFallback: string;
+  close: string;
+  required: string;
+  invalidEmail: string;
+  note: string;
+}
+
 export interface Content {
   ctaShort: string;
   ctaPrimary: string;
@@ -66,6 +89,7 @@ export interface Content {
   finalBody: string;
   email: string;
   footer: string;
+  form: FormCopy;
 }
 
 const cs: Content = {
@@ -85,7 +109,7 @@ const cs: Content = {
     { value: 12, suffix: " měs", display: "12 měs", label: "typická návratnost investice" },
   ],
   servicesLabel: "Co děláme",
-  servicesTitle: "Dvě cesty, jeden tým",
+  servicesTitle: "AI automatizace a vývoj na míru",
   tabAi: "AI automatizace",
   tabBuild: "Weby a aplikace",
   aiServices: [
@@ -133,7 +157,7 @@ const cs: Content = {
     },
   ],
   approachLabel: "Jak pracujeme",
-  approachTitle: "Rychle, s pevnou cenou, bez zbytečných kol",
+  approachTitle: "Tři kroky od analýzy k provozu",
   steps: [
     {
       num: "01",
@@ -194,8 +218,32 @@ const cs: Content = {
   finalLabel: "Kontakt",
   finalHeadline: "Dvacet minut. Víc nepotřebujete.",
   finalBody: "Popíšete svůj provoz. My na rovinu řekneme, co se u vás zaplatí, za kolik a do kdy.",
-  email: "hello@fullcanvas.digital",
-  footer: "© 2026 FULL CANVAS DIGITAL · IČO 00000000",
+  email: "hello@fullcanvas.cz",
+  footer: "© 2026 FULL CANVAS DIGITAL · IČO 06762336",
+  form: {
+    title: "Domluvit 20 minut",
+    subtitle:
+      "Napište pár vět o svém provozu. Ozveme se do jednoho pracovního dne s termínem a prvním odhadem.",
+    name: "Jméno a příjmení",
+    company: "Firma",
+    email: "E-mail",
+    phone: "Telefon",
+    phoneOptional: "nepovinné",
+    message: "Co vás nejvíc zdržuje?",
+    messagePlaceholder:
+      "Např. „Měsíčně ručně přepisujeme asi 400 faktur do Pohody.“",
+    submit: "Odeslat",
+    sending: "Odesílám…",
+    successTitle: "Odesláno.",
+    successBody: "Díky. Ozveme se do jednoho pracovního dne.",
+    errorTitle: "Nepodařilo se odeslat.",
+    errorBody: "Zkuste to prosím znovu, nebo nám napište přímo na",
+    errorFallback: "Napište nám prosím přímo na",
+    close: "Zavřít",
+    required: "Vyplňte prosím toto pole.",
+    invalidEmail: "Zadejte prosím platný e-mail.",
+    note: "Žádný newsletter, žádné předávání dat třetím stranám.",
+  },
 };
 
 const en: Content = {
@@ -215,7 +263,7 @@ const en: Content = {
     { value: 12, suffix: " mo", display: "12 mo", label: "typical payback on the investment" },
   ],
   servicesLabel: "What we do",
-  servicesTitle: "Two paths, one team",
+  servicesTitle: "AI automation and custom software",
   tabAi: "AI automation",
   tabBuild: "Web & apps",
   aiServices: [
@@ -263,7 +311,7 @@ const en: Content = {
     },
   ],
   approachLabel: "How we work",
-  approachTitle: "Fast, fixed-price, no runaround",
+  approachTitle: "Three steps from assessment to operation",
   steps: [
     {
       num: "01",
@@ -324,8 +372,32 @@ const en: Content = {
   finalLabel: "Contact",
   finalHeadline: "Twenty minutes. That’s all it takes.",
   finalBody: "Describe your operations. We’ll tell you straight what pays off, what it costs, and by when.",
-  email: "hello@fullcanvas.digital",
-  footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 00000000",
+  email: "hello@fullcanvas.cz",
+  footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 06762336",
+  form: {
+    title: "Book 20 minutes",
+    subtitle:
+      "Tell us a few sentences about your operations. We'll come back within one working day with a slot and a first estimate.",
+    name: "Full name",
+    company: "Company",
+    email: "Email",
+    phone: "Phone",
+    phoneOptional: "optional",
+    message: "What slows you down most?",
+    messagePlaceholder:
+      "e.g. “We retype about 400 invoices into Pohoda every month.”",
+    submit: "Send",
+    sending: "Sending…",
+    successTitle: "Sent.",
+    successBody: "Thanks. We'll be in touch within one working day.",
+    errorTitle: "Couldn't send that.",
+    errorBody: "Please try again, or email us directly at",
+    errorFallback: "Please email us directly at",
+    close: "Close",
+    required: "Please fill in this field.",
+    invalidEmail: "Please enter a valid email address.",
+    note: "No newsletter, no sharing your data with third parties.",
+  },
 };
 
 export const content: Record<Lang, Content> = { cs, en };
