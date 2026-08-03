@@ -72,6 +72,7 @@ export interface Content {
   tabBuild: string;
   aiServices: ServiceCard[];
   buildServices: ServiceCard[];
+  servicesNote: string;
   approachLabel: string;
   approachTitle: string;
   steps: Step[];
@@ -99,9 +100,9 @@ const cs: Content = {
   heroHeadA: "Vaši lidé přepisují data,",
   heroHeadB: "která už dávno máte.",
   heroSub:
-    "Full Canvas staví AI automatizace s pevným rozsahem a pevnou cenou. Faktury, e-maily, nabídky, firemní znalosti — první výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
+    "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky — první výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
   heroSecondary: "Co automatizujeme ↓",
-  heroMicro: "Na rovinu řekneme, jestli se vám AI zaplatí. Bez závazku.",
+  heroMicro: "Pošlete nám 20 faktur. Do týdne uvidíte, co z nich systém vytáhne — zdarma a bez závazku.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "zpracování jedné faktury" },
     { value: null, suffix: "", display: "2,5 h → 30 min", label: "ranní třídění e-mailů" },
@@ -130,6 +131,11 @@ const cs: Content = {
     },
     {
       num: "04",
+      title: "Hlídání pohledávek",
+      body: "Automatické upomínky podle stáří pohledávky. Peníze na účtu dřív, bez nepříjemných telefonátů.",
+    },
+    {
+      num: "05",
       title: "Znalostní báze s citacemi",
       body: "Zeptáte se vlastními slovy, odpověď přijde s odkazem na dokument a stranu. Nevymýšlí si.",
     },
@@ -156,6 +162,8 @@ const cs: Content = {
       body: "Od jednoho formuláře po celý systém, na míru vašim procesům.",
     },
   ],
+  servicesNote:
+    "Nevidíte tu svůj případ? Většina projektů začíná tím, že nám ho popíšete.",
   approachLabel: "Jak pracujeme",
   approachTitle: "Tři kroky od analýzy k provozu",
   steps: [
@@ -164,15 +172,15 @@ const cs: Content = {
       badge: "Začněte tady",
       title: "Analýza",
       price: "40–80 000 Kč",
-      meta: "1–2 týdny",
+      meta: "1–2 týdny · pevná cena",
       body: "Projdeme váš provoz s lidmi, kteří v něm žijí. Dostanete plán automatizací seřazený podle návratnosti — s čísly.",
     },
     {
       num: "02",
       badge: "",
       title: "Pilot",
-      price: "120–300 000 Kč",
-      meta: "30 dní · pevně",
+      price: "od 120 000 Kč",
+      meta: "30 dní",
       body: "Jedna automatizace v ostrém provozu. Výsledek, ne prezentace.",
     },
     {
@@ -184,15 +192,16 @@ const cs: Content = {
       body: "Dohled, vylepšování, nové automatizace, zaškolení lidí.",
     },
   ],
-  approachMicro: "Začínáme záměrně v malém. Pokud se vám AI nezaplatí, řekneme to na rovinu.",
+  approachMicro:
+    "Cenu pilotu řekneme až po analýze — do té doby by to byl jen odhad. Začínáme záměrně v malém.",
   aboutLabel: "Proč Full Canvas",
   aboutHead: "Platíte za výsledek, ne za prezentace.",
   aboutBody:
-    "Pevný rozsah, pevná cena a první automatizace v provozu do 30 dní. Když se vám nezaplatí, řekneme to dřív, než utratíte korunu navíc. Žádné otevřené účty, žádné nekonečné projekty — jen věci, které vydělávají čas a peníze.",
+    "Analýza za pevnou cenu, jasné zadání a první automatizace v provozu do 30 dní. Cenu znáte dřív, než začneme stavět — a když se vám to nezaplatí, řekneme to dřív, než utratíte korunu navíc. Žádné otevřené účty, žádné nekonečné projekty.",
   priceLabel: "Orientačně",
   prices: [
-    { k: "Analýza", v: "40–80 000 Kč" },
-    { k: "Pilotní AI", v: "120–300 000 Kč" },
+    { k: "Analýza", v: "40–80 000 Kč · pevně" },
+    { k: "Pilotní AI", v: "od 120 000 Kč" },
     { k: "Weby", v: "od 80 000 Kč" },
   ],
   faqLabel: "Časté otázky",
@@ -214,10 +223,14 @@ const cs: Content = {
       q: "Nemáme čas na projekt.",
       a: "Analýza stojí vaše lidi dohromady asi čtyři hodiny. Zbytek práce je na nás.",
     },
+    {
+      q: "Jak poznáme, že to bude fungovat?",
+      a: "Pošlete nám 20 svých skutečných faktur. Do týdne uvidíte, co z nich systém vytáhne, a soubor, který vaše účetní naimportuje. Zdarma, bez závazku. Když to nebude fungovat, řekneme to.",
+    },
   ],
   finalLabel: "Kontakt",
   finalHeadline: "Dvacet minut. Víc nepotřebujete.",
-  finalBody: "Popíšete svůj provoz. My na rovinu řekneme, co se u vás zaplatí, za kolik a do kdy.",
+  finalBody: "Popíšete svůj provoz. My na rovinu řekneme, co se u vás zaplatí a do kdy. Nebo rovnou pošlete 20 faktur a uvidíte výsledek dřív, než se rozhodnete.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · IČO 06762336",
   form: {
@@ -253,9 +266,9 @@ const en: Content = {
   heroHeadA: "Your people retype data",
   heroHeadB: "you already have.",
   heroSub:
-    "Full Canvas builds AI automation with fixed scope and a fixed price. Invoices, email, quotes, company knowledge — first result live within 30 days. No transformation lectures.",
+    "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables — first result live within 30 days. No transformation lectures.",
   heroSecondary: "What we automate ↓",
-  heroMicro: "We’ll tell you straight whether AI pays off for you. No commitment.",
+  heroMicro: "Send us 20 invoices. Within a week you'll see what the system pulls out of them — free, no commitment.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "processing one invoice" },
     { value: null, suffix: "", display: "2.5 h → 30 min", label: "morning email triage" },
@@ -284,6 +297,11 @@ const en: Content = {
     },
     {
       num: "04",
+      title: "Receivables chasing",
+      body: "Automatic reminders that escalate with the age of the debt. Cash in the bank sooner, without the awkward phone call.",
+    },
+    {
+      num: "05",
       title: "Knowledge base with citations",
       body: "Ask in your own words; answers cite the document and page. It doesn’t make things up.",
     },
@@ -310,6 +328,8 @@ const en: Content = {
       body: "From a single form to a whole system, fitted to your process.",
     },
   ],
+  servicesNote:
+    "Don't see your case here? Most projects start with you describing it to us.",
   approachLabel: "How we work",
   approachTitle: "Three steps from assessment to operation",
   steps: [
@@ -318,15 +338,15 @@ const en: Content = {
       badge: "Start here",
       title: "Assessment",
       price: "40–80,000 CZK",
-      meta: "1–2 weeks",
+      meta: "1–2 weeks · fixed price",
       body: "We walk your operations with the people who live in them. You get an automation plan ranked by return — with numbers.",
     },
     {
       num: "02",
       badge: "",
       title: "Pilot",
-      price: "120–300,000 CZK",
-      meta: "30 days · fixed",
+      price: "from 120,000 CZK",
+      meta: "30 days",
       body: "One automation live in production. A result, not a deck.",
     },
     {
@@ -338,15 +358,16 @@ const en: Content = {
       body: "Monitoring, improvements, new automations, staff training.",
     },
   ],
-  approachMicro: "We start small on purpose. If AI won’t pay off for you, we’ll say so.",
+  approachMicro:
+    "We quote the pilot after the assessment — before that it would only be a guess. We start small on purpose.",
   aboutLabel: "Why Full Canvas",
   aboutHead: "You pay for results, not slideware.",
   aboutBody:
-    "Fixed scope, fixed price, and the first automation live within 30 days. If it won’t pay off, we say so before you spend a crown extra. No open-ended bills, no endless projects — just things that earn back time and money.",
+    "A fixed-price assessment, a clear brief, and the first automation live within 30 days. You know the price before we start building — and if it won’t pay off, we say so before you spend a crown extra. No open-ended bills, no endless projects.",
   priceLabel: "Indicative",
   prices: [
-    { k: "Assessment", v: "40–80,000 CZK" },
-    { k: "AI pilot", v: "120–300,000 CZK" },
+    { k: "Assessment", v: "40–80,000 CZK · fixed" },
+    { k: "AI pilot", v: "from 120,000 CZK" },
     { k: "Websites", v: "from 80,000 CZK" },
   ],
   faqLabel: "FAQ",
@@ -368,10 +389,14 @@ const en: Content = {
       q: "We don’t have time for a project.",
       a: "The assessment costs your people about four hours in total. The rest of the work is ours.",
     },
+    {
+      q: "How do we know it will work?",
+      a: "Send us 20 of your real invoices. Within a week you’ll see what the system extracts and a file your accountant can import. Free, no commitment. If it doesn’t work, we’ll say so.",
+    },
   ],
   finalLabel: "Contact",
   finalHeadline: "Twenty minutes. That’s all it takes.",
-  finalBody: "Describe your operations. We’ll tell you straight what pays off, what it costs, and by when.",
+  finalBody: "Describe your operations. We’ll tell you straight what pays off and by when. Or just send 20 invoices and see the result before you decide.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 06762336",
   form: {

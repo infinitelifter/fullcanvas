@@ -1233,3 +1233,25 @@ button.btn-light {
     animation: none;
   }
 }
+
+/* ---------- services: odd card count + closing note ---------- */
+/* The AI tab has 5 cards, the build tab 4. With a 2-column grid an odd count
+   leaves an orphan in the last row, so let it span the full width instead. */
+.services__grid > .service-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.services__note {
+  margin: 34px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 34em;
+}
+
+@media (max-width: 720px) {
+  .services__note {
+    font-size: 16px;
+    margin-top: 26px;
+  }
+}

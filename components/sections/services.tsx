@@ -50,6 +50,9 @@ export default function Services({ t }: { t: Content }) {
             </div>
           ))}
         </div>
+        <Reveal>
+          <p className="services__note">{t.servicesNote}</p>
+        </Reveal>
       </div>
     </section>
   );
