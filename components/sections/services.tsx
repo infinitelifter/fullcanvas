@@ -47,6 +47,7 @@ export default function Services({ t }: { t: Content }) {
                 <h3 className="service-card__title">{svc.title}</h3>
               </div>
               <p className="service-card__body">{svc.body}</p>
+              {svc.note && <p className="service-card__note">{svc.note}</p>}
             </div>
           ))}
         </div>

@@ -1255,3 +1255,13 @@ button.btn-light {
     margin-top: 26px;
   }
 }
+
+/* ---------- service card: optional one-line offer ---------- */
+.service-card__note {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--accent);
+}

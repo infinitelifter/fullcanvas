@@ -24,6 +24,8 @@ export interface ServiceCard {
   num: string;
   title: string;
   body: string;
+  /** Optional one-line offer shown under the card body. */
+  note?: string;
 }
 
 export interface Step {
@@ -106,15 +108,16 @@ export interface Content {
 }
 
 const cs: Content = {
-  ctaShort: "Domluvit 20 minut",
-  ctaPrimary: "Domluvit 20 minut",
+  ctaShort: "Domluvit 15 minut",
+  ctaPrimary: "Domluvit 15 minut",
   heroKicker: "AI automatizace pro firmy",
   heroHeadA: "Vaši lidé přepisují data,",
   heroHeadB: "která už dávno máte.",
   heroSub:
     "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky — první výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
   heroSecondary: "Co automatizujeme ↓",
-  heroMicro: "Pošlete nám 20 faktur. Do týdne uvidíte, co z nich systém vytáhne — zdarma a bez závazku.",
+  heroMicro:
+    "Patnáct minut. Řeknete mi, kde se vám hromadí dotazy, objednávky nebo doklady — a já vám řeknu, co by šlo automatizovat jako první a za kolik.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "zpracování jedné faktury" },
     { value: null, suffix: "", display: "2,5 h → 30 min", label: "ranní třídění e-mailů" },
@@ -130,6 +133,7 @@ const cs: Content = {
       num: "01",
       title: "Vytěžování dokumentů",
       body: "Faktury a objednávky přečteme a pošleme rovnou do ERP nebo Pohody. Konec přepisování.",
+      note: "Pošlete nám 20 faktur — do týdne uvidíte, co z nich systém vytáhne. Zdarma.",
     },
     {
       num: "02",
@@ -209,7 +213,7 @@ const cs: Content = {
   aboutLabel: "Proč Full Canvas",
   aboutHead: "Platíte za výsledek, ne za prezentace.",
   aboutBody:
-    "Analýza za pevnou cenu, jasné zadání a první automatizace v provozu do 30 dní. Cenu znáte dřív, než začneme stavět — a když se vám to nezaplatí, řekneme to dřív, než utratíte korunu navíc. Žádné otevřené účty, žádné nekonečné projekty.",
+    "Analýza za pevnou cenu, kterou znáte před podpisem. Jasné zadání a první automatizace v provozu do 30 dní. Když se vám to nezaplatí, řekneme to dřív, než utratíte korunu navíc. Žádné otevřené účty, žádné nekonečné projekty.",
   priceLabel: "Orientačně",
   prices: [
     { k: "Analýza", v: "40–80 000 Kč · pevně" },
@@ -241,12 +245,12 @@ const cs: Content = {
     },
   ],
   finalLabel: "Kontakt",
-  finalHeadline: "Dvacet minut. Víc nepotřebujete.",
+  finalHeadline: "Patnáct minut. Víc nepotřebujete.",
   finalBody: "Popíšete svůj provoz. My na rovinu řekneme, co se u vás zaplatí a do kdy. Nebo rovnou pošlete 20 faktur a uvidíte výsledek dřív, než se rozhodnete.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · IČO 06762336",
   form: {
-    title: "Domluvit 20 minut",
+    title: "Domluvit 15 minut",
     subtitle:
       "Napište pár vět o svém provozu. Ozveme se do jednoho pracovního dne s termínem a prvním odhadem.",
     name: "Jméno a příjmení",
@@ -272,15 +276,16 @@ const cs: Content = {
 };
 
 const en: Content = {
-  ctaShort: "Book 20 minutes",
-  ctaPrimary: "Book 20 minutes",
+  ctaShort: "Book 15 minutes",
+  ctaPrimary: "Book 15 minutes",
   heroKicker: "AI automation for companies",
   heroHeadA: "Your people retype data",
   heroHeadB: "you already have.",
   heroSub:
     "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables — first result live within 30 days. No transformation lectures.",
   heroSecondary: "What we automate ↓",
-  heroMicro: "Send us 20 invoices. Within a week you'll see what the system pulls out of them — free, no commitment.",
+  heroMicro:
+    "Fifteen minutes. You tell me where enquiries, orders or documents pile up — I'll tell you what to automate first, and what it would cost.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "processing one invoice" },
     { value: null, suffix: "", display: "2.5 h → 30 min", label: "morning email triage" },
@@ -296,6 +301,7 @@ const en: Content = {
       num: "01",
       title: "Document extraction",
       body: "We read invoices and orders and push them straight into your ERP or Pohoda. No more retyping.",
+      note: "Send us 20 invoices — within a week you'll see what the system extracts. Free.",
     },
     {
       num: "02",
@@ -375,7 +381,7 @@ const en: Content = {
   aboutLabel: "Why Full Canvas",
   aboutHead: "You pay for results, not slideware.",
   aboutBody:
-    "A fixed-price assessment, a clear brief, and the first automation live within 30 days. You know the price before we start building — and if it won’t pay off, we say so before you spend a crown extra. No open-ended bills, no endless projects.",
+    "A fixed-price assessment, quoted before you sign. A clear brief, and the first automation live within 30 days. If it won’t pay off, we say so before you spend a crown extra. No open-ended bills, no endless projects.",
   priceLabel: "Indicative",
   prices: [
     { k: "Assessment", v: "40–80,000 CZK · fixed" },
@@ -407,12 +413,12 @@ const en: Content = {
     },
   ],
   finalLabel: "Contact",
-  finalHeadline: "Twenty minutes. That’s all it takes.",
+  finalHeadline: "Fifteen minutes. That’s all it takes.",
   finalBody: "Describe your operations. We’ll tell you straight what pays off and by when. Or just send 20 invoices and see the result before you decide.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 06762336",
   form: {
-    title: "Book 20 minutes",
+    title: "Book 15 minutes",
     subtitle:
       "Tell us a few sentences about your operations. We'll come back within one working day with a slot and a first estimate.",
     name: "Full name",
