@@ -1,4 +1,4 @@
-import type { Content } from "@/lib/content";
+import { SHOW_PRICING, type Content } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
 export default function About({ t }: { t: Content }) {
@@ -11,16 +11,18 @@ export default function About({ t }: { t: Content }) {
           <p className="about__body">{t.aboutBody}</p>
         </Reveal>
       </div>
-      <div className="price-line">
-        <div className="container price-line__inner">
-          <span className="price-line__label">{t.priceLabel}</span>
-          {t.prices.map((price) => (
-            <span key={price.k} className="price-line__item">
-              {price.k} <span className="price-line__value">{price.v}</span>
-            </span>
-          ))}
+      {SHOW_PRICING && (
+        <div className="price-line">
+          <div className="container price-line__inner">
+            <span className="price-line__label">{t.priceLabel}</span>
+            {t.prices.map((price) => (
+              <span key={price.k} className="price-line__item">
+                {price.k} <span className="price-line__value">{price.v}</span>
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

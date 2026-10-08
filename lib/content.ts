@@ -1,5 +1,17 @@
 export type Lang = "cs" | "en";
 
+/**
+ * Price figures are hidden on the site while the same page is used to sell
+ * work beyond the automation ladder, where these numbers don't apply.
+ *
+ * Nothing is deleted — the figures below stay current in `steps[].price`
+ * and `prices`. Flip this to `true` to show them again.
+ *
+ * Hides: the price line under each step in the approach section, and the
+ * indicative price strip under the about section.
+ */
+export const SHOW_PRICING = false;
+
 export interface Stat {
   /** Count-up target; null means the value is a static string (no animation). */
   value: number | null;

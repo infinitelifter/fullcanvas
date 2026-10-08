@@ -1,4 +1,4 @@
-import type { Content } from "@/lib/content";
+import { SHOW_PRICING, type Content } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
 export default function Approach({ t }: { t: Content }) {
@@ -17,7 +17,7 @@ export default function Approach({ t }: { t: Content }) {
                 {step.badge && <span className="step__badge">{step.badge}</span>}
               </div>
               <h3 className="step__title">{step.title}</h3>
-              <div className="step__price">{step.price}</div>
+              {SHOW_PRICING && <div className="step__price">{step.price}</div>}
               <div className="step__meta">{step.meta}</div>
               <p className="step__body">{step.body}</p>
             </Reveal>
