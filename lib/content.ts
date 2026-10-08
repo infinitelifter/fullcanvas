@@ -204,8 +204,8 @@ const cs: Content = {
       badge: "",
       title: "Provoz",
       price: "od 20 000 Kč/měs",
-      meta: "měsíčně",
-      body: "Dohled, vylepšování, nové automatizace, zaškolení lidí.",
+      meta: "průběžně",
+      body: "Dohled, vylepšování a nové automatizace.",
     },
   ],
   approachMicro:
@@ -372,8 +372,8 @@ const en: Content = {
       badge: "",
       title: "Operation",
       price: "from 20,000 CZK/mo",
-      meta: "monthly",
-      body: "Monitoring, improvements, new automations, staff training.",
+      meta: "ongoing",
+      body: "Monitoring, improvements and new automations.",
     },
   ],
   approachMicro:
