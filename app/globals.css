@@ -1265,3 +1265,175 @@ button.btn-light {
   line-height: 1.5;
   color: var(--accent);
 }
+
+/* ---------- header nav + footer links ---------- */
+.site-header__end {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.site-header__nav a {
+  font-size: 14px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.site-header__nav a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.site-footer__links a {
+  font-size: 14px;
+  color: var(--on-dark-soft);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.site-footer__links a:hover {
+  color: #fff;
+  border-bottom-color: var(--rose);
+}
+
+@media (max-width: 720px) {
+  .site-header__end {
+    gap: 14px;
+  }
+
+  .site-header__nav {
+    gap: 14px;
+  }
+
+  .site-header__nav a {
+    font-size: 13px;
+  }
+}
+
+/* ---------- /demo ---------- */
+/* Shorter hero than the homepage: the embed is the point of the page, so it
+   should be reachable without scrolling past a full-height hero. */
+.hero--compact .hero__content {
+  padding-top: 86px;
+  padding-bottom: 72px;
+}
+
+.demo-embed {
+  background: var(--canvas);
+  padding: 44px 0 10px;
+}
+
+.demo-frame {
+  display: block;
+  width: 100%;
+  height: min(1100px, 90vh);
+  border: 0;
+  border-radius: 18px;
+  background: var(--card-bg);
+  box-shadow: 0 18px 50px rgba(27, 26, 32, 0.1);
+}
+
+/* The demo stacks its columns on narrow screens, so it needs real height
+   rather than a viewport fraction. */
+@media (max-width: 860px) {
+  .demo-frame {
+    height: 1450px;
+  }
+}
+
+.demo-fallback {
+  background: var(--card-bg);
+  border: 1px solid var(--hairline-mid);
+  border-radius: 18px;
+  padding: 48px 40px 52px;
+  text-align: center;
+}
+
+.demo-fallback__text {
+  margin: 0 auto 28px;
+  max-width: 28em;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.demo-cta {
+  background: var(--canvas);
+  padding: 8px 0 92px;
+}
+
+.demo-cta__inner {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .hero--compact .hero__content {
+    padding-top: 58px;
+    padding-bottom: 52px;
+  }
+
+  .demo-embed {
+    padding-top: 28px;
+  }
+
+  .demo-fallback {
+    padding: 34px 22px 38px;
+  }
+
+  .demo-fallback__text {
+    font-size: 17px;
+  }
+
+  .demo-cta {
+    padding-bottom: 64px;
+  }
+
+  .demo-cta .btn-primary {
+    width: 100%;
+  }
+}
+
+/* "RECEPCE · ŽIVÁ UKÁZKA" reads badly broken across two lines. */
+.hero--compact .hero__kicker {
+  max-width: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .hero--compact .hero__kicker {
+    white-space: normal;
+  }
+}
+
+/* Entry point to the live demo, alongside the hero's existing secondary link. */
+.hero__secondary--demo {
+  color: var(--rose);
+  border-bottom-color: rgba(224, 169, 185, 0.45);
+}
+
+.hero__secondary--demo:hover {
+  color: #fff;
+  border-bottom-color: var(--rose);
+}

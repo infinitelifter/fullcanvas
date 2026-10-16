@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { content, type Lang } from "@/lib/content";
+import { useState } from "react";
+import { content } from "@/lib/content";
+import { useLang } from "@/lib/use-lang";
 import Header from "@/components/sections/header";
 import Hero from "@/components/sections/hero";
 import Stats from "@/components/sections/stats";
@@ -12,25 +13,9 @@ import Faq from "@/components/sections/faq";
 import FinalCta from "@/components/sections/final-cta";
 import BookingModal from "@/components/booking-modal";
 
-const LANG_KEY = "fcd-lang";
-
 export default function Landing() {
-  const [lang, setLang] = useState<Lang>("cs");
+  const [lang, changeLang] = useLang();
   const [bookingOpen, setBookingOpen] = useState(false);
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem(LANG_KEY);
-    if (saved === "en" || saved === "cs") setLang(saved);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
-
-  const changeLang = (next: Lang) => {
-    setLang(next);
-    window.localStorage.setItem(LANG_KEY, next);
-  };
 
   const t = content[lang];
   const openBooking = () => setBookingOpen(true);

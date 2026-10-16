@@ -6,11 +6,14 @@ export default function Header({
   lang,
   onLangChange,
   onBook,
+  homeHref = "#top",
 }: {
   t: Content;
   lang: Lang;
   onLangChange: (lang: Lang) => void;
   onBook: () => void;
+  /** "#top" on the homepage; "/" on subpages, where there is no hero to scroll to. */
+  homeHref?: string;
 }) {
   return (
     <header className="site-header">
@@ -23,12 +26,17 @@ export default function Header({
             EN
           </button>
         </div>
-        <a href="#top" aria-label="Full Canvas Digital" className="site-header__logo">
+        <a href={homeHref} aria-label="Full Canvas Digital" className="site-header__logo">
           <Logo />
         </a>
-        <button type="button" onClick={onBook} className="btn-header">
-          {t.ctaShort}
-        </button>
+        <div className="site-header__end">
+          <nav className="site-header__nav" aria-label={t.navLabel}>
+            <a href="/demo">{t.navDemo}</a>
+          </nav>
+          <button type="button" onClick={onBook} className="btn-header">
+            {t.ctaShort}
+          </button>
+        </div>
       </div>
     </header>
   );
