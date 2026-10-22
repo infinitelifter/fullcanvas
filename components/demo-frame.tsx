@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Content } from "@/lib/content";
 import type { Locale } from "@/lib/routes";
+import { useBooking } from "@/components/booking";
 
 /**
  * The Recepce demo is a separate FastAPI app on its own origin — it needs a
@@ -20,15 +21,8 @@ function originOf(url: string): string {
   }
 }
 
-export default function DemoFrame({
-  t,
-  locale,
-  onBook,
-}: {
-  t: Content;
-  locale: Locale;
-  onBook: () => void;
-}) {
+export default function DemoFrame({ t, locale }: { t: Content; locale: Locale }) {
+  const onBook = useBooking();
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [timedOut, setTimedOut] = useState(false);
@@ -62,10 +56,20 @@ export default function DemoFrame({
   return (
     <section className="demo-embed">
       <div className="container">
-        <div style={{ display: showFallback ? "none" : "block" }}>
+        {/* The app in a window: a thin browser-style bar, then the embed in
+            ?embed=1 mode, which hides the app's own header and headline so
+            the page doesn't show a page inside a page. */}
+        <div className="browser browser--demo" style={{ display: showFallback ? "none" : "block" }}>
+          <div className="browser__bar" aria-hidden="true">
+            <span className="browser__dot" />
+            <span className="browser__dot" />
+            <span className="browser__dot" />
+            <span className="browser__url">demo.fullcanvas.cz</span>
+            <span className="browser__live">{t.demo.liveBadge}</span>
+          </div>
           <iframe
             ref={frameRef}
-            src={`${DEMO_URL}/?lang=${locale}`}
+            src={`${DEMO_URL}/?lang=${locale}&embed=1`}
             title={t.demo.frameTitle}
             loading="lazy"
             allow="clipboard-write"
@@ -82,6 +86,7 @@ export default function DemoFrame({
             </button>
           </div>
         )}
+        <p className="demo-embed__note">{t.demo.frameNote}</p>
       </div>
     </section>
   );

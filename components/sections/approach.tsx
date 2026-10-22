@@ -4,7 +4,7 @@ import StepGrid from "@/components/sections/step-grid";
 export default function Approach({ t }: { t: Content }) {
   return (
     <StepGrid
-      id="pristup"
+      id="postup"
       label={t.approachLabel}
       title={t.approachTitle}
       steps={t.steps}

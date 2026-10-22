@@ -3,9 +3,11 @@ import {
   SITE_URL,
   languageAlternates,
   pathFor,
-  route,
+  urlFor,
+  SERVICE_ROUTES,
   type Locale,
 } from "@/lib/routes";
+import { SERVICES, serviceCopy, service as serviceDef } from "@/lib/services";
 
 /* ------------------------------------------------------------------ *
  * TODO(Ondrej): paste the verification codes here, then redeploy.
@@ -54,22 +56,29 @@ export const PAGE_SEO: Record<string, Record<Locale, { title: string; descriptio
   },
   demo: {
     cs: {
-      title: "Živá ukázka — Recepce | Full Canvas Digital",
+      title: "Živá ukázka AI recepce: dotaz zodpovězený do minuty | Full Canvas Digital",
       description:
         "Živá ukázka AI recepce: dotaz zodpovězený do minuty a termín domluvený bez recepční. Zkuste si ji sami, nic se neposílá skutečným lidem.",
     },
     en: {
-      title: "Live demo — AI reception | Full Canvas Digital",
+      title: "Live demo of an AI reception: answered within a minute | Full Canvas Digital",
       description:
         "Live demo of an AI reception: an inquiry answered within a minute and a slot booked without a receptionist. Try it; nothing reaches real people.",
     },
   },
 };
 
+/** Subpage titles end with the brand; the homepage title already starts with it. */
+const TITLE_SUFFIX = " | Full Canvas Digital";
+
 export function pageSeo(key: string, locale: Locale) {
   const entry = PAGE_SEO[key];
-  if (!entry) throw new Error(`No PAGE_SEO entry for route key: ${key}`);
-  return entry[locale];
+  if (entry) return entry[locale];
+  if (SERVICE_ROUTES.some((r) => r.key === key)) {
+    const c = serviceCopy(key, locale);
+    return { title: `${c.title}${TITLE_SUFFIX}`, description: c.description };
+  }
+  throw new Error(`No SEO entry for route key: ${key}`);
 }
 
 /**
@@ -126,6 +135,113 @@ export function buildRootMetadata(locale: Locale): Metadata {
     formatDetection: { telephone: false },
     other: { "og:locale": OG_LOCALE[locale] },
   };
+}
+
+/**
+ * Per-page JSON-LD for a service page: BreadcrumbList, FAQPage built from the
+ * visible FAQ, and a Service node (not on the comparison page, which is an
+ * article about options rather than something we sell).
+ */
+export function serviceJsonLd(key: string, locale: Locale) {
+  const c = serviceCopy(key, locale);
+  const def = serviceDef(key);
+  const url = urlFor(key, locale);
+  const orgId = `${SITE_URL}/#organization`;
+  const homeName = locale === "cs" ? "Úvod" : "Home";
+
+  const graph: Record<string, unknown>[] = [
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: homeName, item: urlFor("home", locale) },
+        { "@type": "ListItem", position: 2, name: c.nav, item: url },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      mainEntity: c.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ];
+
+  if (def.serviceType) {
+    graph.unshift({
+      "@type": "Service",
+      "@id": `${url}#service`,
+      name: c.nav,
+      serviceType: def.serviceType,
+      description: c.description,
+      url,
+      inLanguage: HTML_LANG[locale],
+      provider: { "@id": orgId },
+      areaServed: [
+        { "@type": "Country", name: "Czech Republic" },
+        { "@type": "Country", name: "Slovakia" },
+      ],
+    });
+  }
+
+  return { "@context": "https://schema.org", "@graph": graph };
+}
+
+/** The demo page's FAQ as FAQPage, so the answers count as visible Q&A. */
+export function faqJsonLd(url: string, faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${url}#faq`,
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** Everything a crawler needs to know about the site, for /llms.txt. */
+export function llmsTxt(): string {
+  const lines: string[] = [];
+  lines.push(`# ${SITE_NAME}`);
+  lines.push("");
+  lines.push(
+    "> AI automatizace pro firmy v Česku a na Slovensku: faktury, e-maily a poptávky, cenové nabídky, firemní znalosti, hotely. Analýza za pevnou cenu, první automatizace v provozu do 30 dní.",
+  );
+  lines.push(
+    "> AI automation for companies in Czechia and Slovakia: invoices, email and inquiries, quotes, company knowledge, hotels. Fixed-price assessment, first automation live within 30 days.",
+  );
+  lines.push("");
+  lines.push(`Kontakt / Contact: ${CONTACT_EMAIL}`);
+  lines.push(`Sídlo / Based in: Praha, CZ · IČO ${ICO}`);
+  lines.push("Působnost / Areas served: Česká republika, Slovensko");
+  lines.push("");
+  lines.push("## Stránky (česky)");
+  lines.push(`- [Úvod](${urlFor("home", "cs")}): co automatizujeme, jak pracujeme, FAQ`);
+  lines.push(`- [Živá ukázka](${urlFor("demo", "cs")}): skutečná AI recepce, kterou si můžete vyzkoušet`);
+  for (const s of SERVICES) {
+    const c = s.copy.cs;
+    lines.push(`- [${c.nav}](${urlFor(s.key, "cs")}): ${c.description}`);
+  }
+  lines.push("");
+  lines.push("## Pages (English)");
+  lines.push(`- [Home](${urlFor("home", "en")}): what we automate, how we work, FAQ`);
+  lines.push(`- [Live demo](${urlFor("demo", "en")}): a real AI reception you can try`);
+  for (const s of SERVICES) {
+    const c = s.copy.en;
+    lines.push(`- [${c.nav}](${urlFor(s.key, "en")}): ${c.description}`);
+  }
+  lines.push("");
+  lines.push("## Jak pracujeme / How we work");
+  lines.push("1. Analýza za pevnou cenu (1–2 týdny): spočítá, kolik proces stojí dnes, a seřadí automatizace podle návratnosti.");
+  lines.push("2. Pilot: jedna automatizace v ostrém provozu do 30 dní od schválení.");
+  lines.push("3. Provoz: dohled, vylepšování, další automatizace.");
+  lines.push("");
+  lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
+  return lines.join("\n") + "\n";
 }
 
 /**

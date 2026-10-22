@@ -1,7 +1,7 @@
 /**
  * Every URL on the site, paired across locales. One source of truth so the
- * language switcher, hreflang alternates, sitemap and footer nav can never
- * drift apart — adding a Phase 2 service page here puts it in all four.
+ * language switcher, hreflang alternates, sitemap, footer nav and llms.txt
+ * can never drift apart — a service page added here appears in all of them.
  */
 
 export type Locale = "cs" | "en";
@@ -21,6 +21,55 @@ export interface RouteDef {
   priority: number;
 }
 
+/**
+ * Service pages: the key is the slug-independent id used by lib/services.ts.
+ * Czech slugs are the search phrases; English slugs are their equivalents.
+ */
+export const SERVICE_ROUTES: readonly RouteDef[] = [
+  {
+    key: "invoices",
+    group: "services",
+    paths: { cs: "/automatizace-faktur", en: "/en/invoice-automation" },
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
+    key: "email",
+    group: "services",
+    paths: { cs: "/automatizace-e-mailu-a-poptavek", en: "/en/email-and-inquiry-automation" },
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
+    key: "quotes",
+    group: "services",
+    paths: { cs: "/automatizace-nabidek", en: "/en/quote-automation" },
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
+    key: "knowledge",
+    group: "services",
+    paths: { cs: "/ai-firemni-znalosti", en: "/en/ai-company-knowledge-base" },
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
+    key: "hotels",
+    group: "services",
+    paths: { cs: "/ai-automatizace-pro-hotely", en: "/en/ai-automation-for-hotels" },
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
+    key: "comparison",
+    group: "services",
+    paths: { cs: "/ai-agentura-vs-studio-vs-saas", en: "/en/ai-agency-vs-studio-vs-saas" },
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+] as const;
+
 export const ROUTES: readonly RouteDef[] = [
   {
     key: "home",
@@ -35,7 +84,7 @@ export const ROUTES: readonly RouteDef[] = [
     changeFrequency: "monthly",
     priority: 0.8,
   },
-  // Phase 2 service pages land here and flow into sitemap, hreflang and nav.
+  ...SERVICE_ROUTES,
 ] as const;
 
 export function route(key: string): RouteDef {
@@ -73,4 +122,15 @@ export function languageAlternates(key: string): Record<string, string> {
 
 export function routesInGroup(group: NonNullable<RouteDef["group"]>): readonly RouteDef[] {
   return ROUTES.filter((r) => r.group === group);
+}
+
+/** The last path segment of a service page in a locale: what [slug] receives. */
+export function serviceSlug(key: string, locale: Locale): string {
+  const path = pathFor(key, locale);
+  return path.split("/").filter(Boolean).pop() ?? "";
+}
+
+/** Reverse lookup for app/(cs)/[slug] and app/en/[slug]. */
+export function serviceKeyForSlug(slug: string, locale: Locale): string | undefined {
+  return SERVICE_ROUTES.find((r) => serviceSlug(r.key, locale) === slug)?.key;
 }

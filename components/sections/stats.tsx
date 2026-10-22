@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Content, Stat } from "@/lib/content";
-import Reveal from "@/components/reveal";
 
 const COUNT_DURATION = 1150;
 
@@ -77,17 +76,21 @@ function StatValue({ stat }: { stat: Stat }) {
   );
 }
 
+/**
+ * Docked at the bottom of the hero. No reveal wrapper: the numbers are on the
+ * first screen and must be at full contrast from the first paint.
+ */
 export default function Stats({ t }: { t: Content }) {
   return (
-    <section className="stats">
+    <div className="stats">
       <div className="container stats__grid">
         {t.stats.map((stat, i) => (
-          <Reveal key={i} className="stat">
+          <div key={i} className="stat">
             <StatValue stat={stat} />
             <div className="stat__label">{stat.label}</div>
-          </Reveal>
+          </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

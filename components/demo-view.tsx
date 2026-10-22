@@ -1,63 +1,60 @@
-"use client";
-
-import { useState } from "react";
 import { content } from "@/lib/content";
-import type { Locale } from "@/lib/routes";
-import Header from "@/components/sections/header";
+import { urlFor, type Locale } from "@/lib/routes";
+import { faqJsonLd } from "@/lib/seo";
+import PageShell from "@/components/page-shell";
 import StepGrid from "@/components/sections/step-grid";
-import SiteFooter from "@/components/sections/site-footer";
-import BookingModal from "@/components/booking-modal";
+import Faq from "@/components/sections/faq";
+import FinalCta from "@/components/sections/final-cta";
 import DemoFrame from "@/components/demo-frame";
+import { BookButton } from "@/components/booking";
 
+/**
+ * /demo: the real Recepce app in a window, with the text crawlers and AI need
+ * around it (H1, lead, how it works, FAQ, CTA). The app itself is unchanged;
+ * it only hides its own header when loaded with ?embed=1.
+ */
 export default function DemoView({ locale }: { locale: Locale }) {
-  const [bookingOpen, setBookingOpen] = useState(false);
-
   const t = content[locale];
   const d = t.demo;
-  const openBooking = () => setBookingOpen(true);
+  const jsonLd = JSON.stringify(faqJsonLd(urlFor("demo", locale), d.faqs)).replace(/</g, "\\u003c");
 
   return (
-    <>
-      <Header t={t} locale={locale} routeKey="demo" onBook={openBooking} />
-      <main>
-        <section className="hero hero--compact">
-          <div className="hero__blobs" aria-hidden="true">
-            <div className="hero__blob hero__blob--1" />
-            <div className="hero__blob hero__blob--2" />
-            <div className="hero__blob hero__blob--3" />
-          </div>
-          <div className="container hero__content">
-            <div className="hero__kicker">
-              <span className="hero__kicker-rule" />
-              {d.eyebrow}
-            </div>
-            <h1 className="hero__title">
-              {d.headPre} <span className="hero__title-b">{d.headEm}</span>
-              {d.headPost}
-            </h1>
-            <p className="hero__sub">{d.lead}</p>
-          </div>
-        </section>
+    <PageShell locale={locale} routeKey="demo">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
 
-        <DemoFrame t={t} locale={locale} onBook={openBooking} />
-
-        <StepGrid steps={d.columns} />
-
-        <section className="demo-cta">
-          <div className="container demo-cta__inner">
-            <button type="button" onClick={openBooking} className="btn-primary">
-              {t.ctaPrimary}
-            </button>
+      <section className="hero hero--compact">
+        <div className="hero__blobs" aria-hidden="true">
+          <div className="hero__blob hero__blob--1" />
+          <div className="hero__blob hero__blob--2" />
+          <div className="hero__blob hero__blob--3" />
+        </div>
+        <div className="container hero__content">
+          <div className="hero__kicker">
+            <span className="hero__kicker-rule" />
+            {d.eyebrow}
           </div>
-        </section>
-      </main>
-      <SiteFooter t={t} locale={locale} />
-      <BookingModal
-        open={bookingOpen}
-        onClose={() => setBookingOpen(false)}
-        t={t}
-        lang={locale}
-      />
-    </>
+          <h1 className="hero__title">
+            {d.headPre} <span className="hero__title-b">{d.headEm}</span>
+            {d.headPost}
+          </h1>
+          <p className="hero__sub">{d.lead}</p>
+        </div>
+      </section>
+
+      <DemoFrame t={t} locale={locale} />
+
+      <StepGrid steps={d.columns} />
+
+      <Faq id="demo-faq" label={d.faqLabel} title={d.faqTitle} items={d.faqs} group="demo-faq" />
+
+      <section className="demo-cta">
+        <div className="container demo-cta__inner">
+          <p className="demo-cta__line">{d.ctaLine}</p>
+          <BookButton className="btn-primary">{t.ctaPrimary}</BookButton>
+        </div>
+      </section>
+
+      <FinalCta t={t} />
+    </PageShell>
   );
 }
