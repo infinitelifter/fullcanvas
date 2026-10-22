@@ -1,6 +1,16 @@
+import Link from "next/link";
 import type { Content } from "@/lib/content";
+import { pathFor, type Locale } from "@/lib/routes";
 
-export default function Hero({ t, onBook }: { t: Content; onBook: () => void }) {
+export default function Hero({
+  t,
+  locale,
+  onBook,
+}: {
+  t: Content;
+  locale: Locale;
+  onBook: () => void;
+}) {
   return (
     <section id="top" className="hero">
       <div className="hero__blobs" aria-hidden="true">
@@ -24,9 +34,9 @@ export default function Hero({ t, onBook }: { t: Content; onBook: () => void }) 
           <a href="#sluzby" className="hero__secondary">
             {t.heroSecondary}
           </a>
-          <a href="/demo" className="hero__secondary hero__secondary--demo">
+          <Link href={pathFor("demo", locale)} className="hero__secondary hero__secondary--demo">
             {t.heroDemoLink}
-          </a>
+          </Link>
         </div>
         <div className="hero__micro">{t.heroMicro}</div>
       </div>

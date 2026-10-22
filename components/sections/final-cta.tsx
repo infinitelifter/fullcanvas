@@ -1,8 +1,17 @@
 import type { Content } from "@/lib/content";
+import type { Locale } from "@/lib/routes";
 import Reveal from "@/components/reveal";
 import SiteFooter from "@/components/sections/site-footer";
 
-export default function FinalCta({ t, onBook }: { t: Content; onBook: () => void }) {
+export default function FinalCta({
+  t,
+  locale,
+  onBook,
+}: {
+  t: Content;
+  locale: Locale;
+  onBook: () => void;
+}) {
   return (
     <section id="kontakt" className="final-cta">
       <div className="final-cta__glow" aria-hidden="true" />
@@ -21,7 +30,7 @@ export default function FinalCta({ t, onBook }: { t: Content; onBook: () => void
           </div>
         </Reveal>
       </div>
-      <SiteFooter t={t} />
+      <SiteFooter t={t} locale={locale} />
     </section>
   );
 }

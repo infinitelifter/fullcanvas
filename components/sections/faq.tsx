@@ -1,12 +1,14 @@
-"use client";
-
-import { useState } from "react";
 import type { Content } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
+/**
+ * <details open> rather than a React-state accordion. The previous version
+ * rendered `{open[i] && <p>}`, so answers were absent from the HTML entirely
+ * until clicked — Google, Bing and every AI crawler saw the questions and
+ * none of the answers. Now the text ships in the markup, works without
+ * JavaScript, and visitors can still collapse an item.
+ */
 export default function Faq({ t }: { t: Content }) {
-  const [open, setOpen] = useState<Record<number, boolean>>({});
-
   return (
     <section id="faq" className="faq">
       <div className="faq__inner">
@@ -16,20 +18,13 @@ export default function Faq({ t }: { t: Content }) {
         </Reveal>
         <Reveal className="faq__list">
           {t.faqs.map((faq, i) => (
-            <div key={i} className="faq__item">
-              <button
-                type="button"
-                className="faq__question"
-                aria-expanded={!!open[i]}
-                onClick={() => setOpen((prev) => ({ ...prev, [i]: !prev[i] }))}
-              >
+            <details key={i} className="faq__item" open>
+              <summary className="faq__question">
                 <span>{faq.q}</span>
-                <span className="faq__sign" aria-hidden="true">
-                  {open[i] ? "–" : "+"}
-                </span>
-              </button>
-              {open[i] && <p className="faq__answer">{faq.a}</p>}
-            </div>
+                <span className="faq__sign" aria-hidden="true" />
+              </summary>
+              <p className="faq__answer">{faq.a}</p>
+            </details>
           ))}
         </Reveal>
       </div>

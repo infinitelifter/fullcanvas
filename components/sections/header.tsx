@@ -1,37 +1,50 @@
-import type { Content, Lang } from "@/lib/content";
+import Link from "next/link";
+import type { Content } from "@/lib/content";
+import { pathFor, type Locale } from "@/lib/routes";
 import Logo from "@/components/logo";
 
 export default function Header({
   t,
-  lang,
-  onLangChange,
+  locale,
+  routeKey,
   onBook,
-  homeHref = "#top",
 }: {
   t: Content;
-  lang: Lang;
-  onLangChange: (lang: Lang) => void;
+  locale: Locale;
+  /** Which page we're on, so the switcher links to its counterpart. */
+  routeKey: string;
   onBook: () => void;
-  /** "#top" on the homepage; "/" on subpages, where there is no hero to scroll to. */
-  homeHref?: string;
 }) {
+  const homeHref = pathFor("home", locale);
+
   return (
     <header className="site-header">
       <div className="container site-header__inner">
+        {/* Real links, not state: crawlers must be able to reach both locales. */}
         <div className="lang-toggle">
-          <button type="button" className={lang === "cs" ? "is-active" : ""} onClick={() => onLangChange("cs")}>
+          <Link
+            href={pathFor(routeKey, "cs")}
+            hrefLang="cs"
+            className={locale === "cs" ? "is-active" : ""}
+            aria-current={locale === "cs" ? "true" : undefined}
+          >
             CS
-          </button>
-          <button type="button" className={lang === "en" ? "is-active" : ""} onClick={() => onLangChange("en")}>
+          </Link>
+          <Link
+            href={pathFor(routeKey, "en")}
+            hrefLang="en"
+            className={locale === "en" ? "is-active" : ""}
+            aria-current={locale === "en" ? "true" : undefined}
+          >
             EN
-          </button>
+          </Link>
         </div>
-        <a href={homeHref} aria-label="Full Canvas Digital" className="site-header__logo">
+        <Link href={homeHref} aria-label="Full Canvas Digital" className="site-header__logo">
           <Logo />
-        </a>
+        </Link>
         <div className="site-header__end">
           <nav className="site-header__nav" aria-label={t.navLabel}>
-            <a href="/demo">{t.navDemo}</a>
+            <Link href={pathFor("demo", locale)}>{t.navDemo}</Link>
           </nav>
           <button type="button" onClick={onBook} className="btn-header">
             {t.ctaShort}

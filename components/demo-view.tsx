@@ -2,30 +2,23 @@
 
 import { useState } from "react";
 import { content } from "@/lib/content";
-import { useLang } from "@/lib/use-lang";
+import type { Locale } from "@/lib/routes";
 import Header from "@/components/sections/header";
 import StepGrid from "@/components/sections/step-grid";
 import SiteFooter from "@/components/sections/site-footer";
 import BookingModal from "@/components/booking-modal";
 import DemoFrame from "@/components/demo-frame";
 
-export default function DemoView() {
-  const [lang, changeLang] = useLang();
+export default function DemoView({ locale }: { locale: Locale }) {
   const [bookingOpen, setBookingOpen] = useState(false);
 
-  const t = content[lang];
+  const t = content[locale];
   const d = t.demo;
   const openBooking = () => setBookingOpen(true);
 
   return (
     <>
-      <Header
-        t={t}
-        lang={lang}
-        onLangChange={changeLang}
-        onBook={openBooking}
-        homeHref="/"
-      />
+      <Header t={t} locale={locale} routeKey="demo" onBook={openBooking} />
       <main>
         <section className="hero hero--compact">
           <div className="hero__blobs" aria-hidden="true">
@@ -46,7 +39,7 @@ export default function DemoView() {
           </div>
         </section>
 
-        <DemoFrame t={t} lang={lang} onBook={openBooking} />
+        <DemoFrame t={t} locale={locale} onBook={openBooking} />
 
         <StepGrid steps={d.columns} />
 
@@ -58,12 +51,12 @@ export default function DemoView() {
           </div>
         </section>
       </main>
-      <SiteFooter t={t} />
+      <SiteFooter t={t} locale={locale} />
       <BookingModal
         open={bookingOpen}
         onClose={() => setBookingOpen(false)}
         t={t}
-        lang={lang}
+        lang={locale}
       />
     </>
   );
