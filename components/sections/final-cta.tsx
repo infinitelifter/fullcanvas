@@ -1,6 +1,6 @@
 import type { Content } from "@/lib/content";
-import Logo from "@/components/logo";
 import Reveal from "@/components/reveal";
+import SiteFooter from "@/components/sections/site-footer";
 
 export default function FinalCta({ t, onBook }: { t: Content; onBook: () => void }) {
   return (
@@ -21,12 +21,7 @@ export default function FinalCta({ t, onBook }: { t: Content; onBook: () => void
           </div>
         </Reveal>
       </div>
-      <footer className="site-footer">
-        <div className="container site-footer__inner">
-          <Logo fill="#F5F2EE" width={184} height={53} />
-          <div className="site-footer__meta">{t.footer}</div>
-        </div>
-      </footer>
+      <SiteFooter t={t} />
     </section>
   );
 }

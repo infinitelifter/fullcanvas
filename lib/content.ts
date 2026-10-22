@@ -70,6 +70,25 @@ export interface FormCopy {
   note: string;
 }
 
+export interface DemoColumn {
+  num: string;
+  title: string;
+  body: string;
+}
+
+export interface DemoCopy {
+  metaTitle: string;
+  eyebrow: string;
+  /** H1 split so the middle phrase can take the rose emphasis. */
+  headPre: string;
+  headEm: string;
+  headPost: string;
+  lead: string;
+  frameTitle: string;
+  fallback: string;
+  columns: DemoColumn[];
+}
+
 export interface Content {
   ctaShort: string;
   ctaPrimary: string;
@@ -78,6 +97,7 @@ export interface Content {
   heroHeadB: string;
   heroSub: string;
   heroSecondary: string;
+  heroDemoLink: string;
   heroMicro: string;
   stats: Stat[];
   servicesLabel: string;
@@ -104,6 +124,10 @@ export interface Content {
   finalBody: string;
   email: string;
   footer: string;
+  navLabel: string;
+  navHome: string;
+  navDemo: string;
+  demo: DemoCopy;
   form: FormCopy;
 }
 
@@ -116,6 +140,7 @@ const cs: Content = {
   heroSub:
     "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky — první výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
   heroSecondary: "Co automatizujeme ↓",
+  heroDemoLink: "Živá ukázka →",
   heroMicro:
     "Patnáct minut. Řeknete mi, kde se vám hromadí dotazy, objednávky nebo doklady — a já vám řeknu, co by šlo automatizovat jako první a za kolik.",
   stats: [
@@ -249,6 +274,36 @@ const cs: Content = {
   finalBody: "Popíšete svůj provoz. My na rovinu řekneme, co se u vás zaplatí a do kdy. Nebo rovnou pošlete 20 faktur a uvidíte výsledek dřív, než se rozhodnete.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · IČO 06762336",
+  navLabel: "Navigace",
+  navHome: "Úvod",
+  navDemo: "Ukázka",
+  demo: {
+    metaTitle: "Živá ukázka — Recepce | Full Canvas Digital",
+    eyebrow: "RECEPCE · ŽIVÁ UKÁZKA",
+    headPre: "Dotaz zodpovězený",
+    headEm: "do minuty",
+    headPost: ", termín domluvený bez recepce.",
+    lead: "Tohle je skutečný systém, ne video. Napište jako pacient, kterýmkoli jazykem, a sledujte, co se stane. Nic se neposílá skutečným lidem.",
+    frameTitle: "Recepce demo",
+    fallback: "Ukázka se právě nahrává — napište mi a ukážu vám ji naživo.",
+    columns: [
+      {
+        num: "01",
+        title: "Co uvidíte",
+        body: "Dotaz → roztřídění → odpověď se třemi volnými termíny → potvrzení jedním klikem. Zmeškaný hovor → SMS do minuty.",
+      },
+      {
+        num: "02",
+        title: "Co to nedělá",
+        body: "Nezvedá telefon, nediagnostikuje, nic neposílá bez vaší kontroly.",
+      },
+      {
+        num: "03",
+        title: "Jak to dostanete",
+        body: "Analýza vašeho provozu, pilot za pevnou cenu, nasazení do dvou týdnů.",
+      },
+    ],
+  },
   form: {
     title: "Domluvit 15 minut",
     subtitle:
@@ -284,6 +339,7 @@ const en: Content = {
   heroSub:
     "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables — first result live within 30 days. No transformation lectures.",
   heroSecondary: "What we automate ↓",
+  heroDemoLink: "Live demo →",
   heroMicro:
     "Fifteen minutes. You tell me where enquiries, orders or documents pile up — I'll tell you what to automate first, and what it would cost.",
   stats: [
@@ -417,6 +473,36 @@ const en: Content = {
   finalBody: "Describe your operations. We’ll tell you straight what pays off and by when. Or just send 20 invoices and see the result before you decide.",
   email: "hello@fullcanvas.cz",
   footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 06762336",
+  navLabel: "Navigation",
+  navHome: "Home",
+  navDemo: "Demo",
+  demo: {
+    metaTitle: "Live demo — Reception | Full Canvas Digital",
+    eyebrow: "RECEPTION · LIVE DEMO",
+    headPre: "Answered",
+    headEm: "within a minute",
+    headPost: ", booked without a receptionist.",
+    lead: "This is the real system, not a video. Write as a patient, in any language, and watch what happens. Nothing is sent to real people.",
+    frameTitle: "Recepce demo",
+    fallback: "The demo is loading — write to me and I’ll show it live.",
+    columns: [
+      {
+        num: "01",
+        title: "What you’ll see",
+        body: "Inquiry → triage → reply with three free slots → one-click confirmation. Missed call → SMS within a minute.",
+      },
+      {
+        num: "02",
+        title: "What it doesn’t do",
+        body: "It doesn’t answer the phone, doesn’t diagnose, sends nothing without your review.",
+      },
+      {
+        num: "03",
+        title: "How you get it",
+        body: "Analysis of your intake, fixed-price pilot, live in two weeks.",
+      },
+    ],
+  },
   form: {
     title: "Book 15 minutes",
     subtitle:

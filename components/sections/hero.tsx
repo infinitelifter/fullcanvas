@@ -24,6 +24,9 @@ export default function Hero({ t, onBook }: { t: Content; onBook: () => void }) 
           <a href="#sluzby" className="hero__secondary">
             {t.heroSecondary}
           </a>
+          <a href="/demo" className="hero__secondary hero__secondary--demo">
+            {t.heroDemoLink}
+          </a>
         </div>
         <div className="hero__micro">{t.heroMicro}</div>
       </div>
