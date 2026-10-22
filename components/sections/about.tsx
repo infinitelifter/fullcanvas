@@ -3,7 +3,7 @@ import Reveal from "@/components/reveal";
 
 export default function About({ t }: { t: Content }) {
   return (
-    <section className="about">
+    <section id="proc" className="about">
       <div className="container about__inner">
         <Reveal className="about__copy">
           <div className="mono-label">{t.aboutLabel}</div>

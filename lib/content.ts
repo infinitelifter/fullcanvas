@@ -77,7 +77,6 @@ export interface DemoColumn {
 }
 
 export interface DemoCopy {
-  metaTitle: string;
   eyebrow: string;
   /** H1 split so the middle phrase can take the rose emphasis. */
   headPre: string;
@@ -87,6 +86,43 @@ export interface DemoCopy {
   frameTitle: string;
   fallback: string;
   columns: DemoColumn[];
+  liveBadge: string;
+  frameNote: string;
+  faqLabel: string;
+  faqTitle: string;
+  faqs: FaqItem[];
+  ctaLine: string;
+}
+
+export interface NavCopy {
+  menuOpen: string;
+  menuClose: string;
+  services: string;
+  how: string;
+  faq: string;
+  contact: string;
+  footerServices: string;
+  footerCompany: string;
+}
+
+export interface SliderCopy {
+  prev: string;
+  next: string;
+  goTo: string;
+  moreAi: string;
+  moreBuild: string;
+  labelAi: string;
+  labelBuild: string;
+}
+
+export interface ProductCopy {
+  label: string;
+  title: string;
+  body: string;
+  note: string;
+  cta: string;
+  alt: string;
+  todo: string;
 }
 
 export interface Content {
@@ -127,6 +163,10 @@ export interface Content {
   navLabel: string;
   navHome: string;
   navDemo: string;
+  nav: NavCopy;
+  slider: SliderCopy;
+  product: ProductCopy;
+  footerTagline: string;
   demo: DemoCopy;
   form: FormCopy;
 }
@@ -138,11 +178,11 @@ const cs: Content = {
   heroHeadA: "Vaši lidé přepisují data,",
   heroHeadB: "která už dávno máte.",
   heroSub:
-    "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky — první výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
+    "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky. První výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
   heroSecondary: "Co automatizujeme ↓",
   heroDemoLink: "Živá ukázka →",
   heroMicro:
-    "Patnáct minut. Řeknete mi, kde se vám hromadí dotazy, objednávky nebo doklady — a já vám řeknu, co by šlo automatizovat jako první a za kolik.",
+    "Patnáct minut. Řeknete mi, kde se vám hromadí dotazy, objednávky nebo doklady, a já vám řeknu, co by šlo automatizovat jako první a za kolik.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "zpracování jedné faktury" },
     { value: null, suffix: "", display: "2,5 h → 30 min", label: "ranní třídění e-mailů" },
@@ -158,7 +198,7 @@ const cs: Content = {
       num: "01",
       title: "Vytěžování dokumentů",
       body: "Faktury a objednávky přečteme a pošleme rovnou do ERP nebo Pohody. Konec přepisování.",
-      note: "Pošlete nám 20 faktur — do týdne uvidíte, co z nich systém vytáhne. Zdarma.",
+      note: "Pošlete nám 20 faktur. Do týdne uvidíte, co z nich systém vytáhne. Zdarma.",
     },
     {
       num: "02",
@@ -214,7 +254,7 @@ const cs: Content = {
       title: "Analýza",
       price: "40–80 000 Kč",
       meta: "1–2 týdny · pevná cena",
-      body: "Projdeme váš provoz s lidmi, kteří v něm žijí. Dostanete plán automatizací seřazený podle návratnosti — s čísly.",
+      body: "Projdeme váš provoz s lidmi, kteří v něm žijí. Dostanete plán automatizací seřazený podle návratnosti, s čísly.",
     },
     {
       num: "02",
@@ -234,7 +274,7 @@ const cs: Content = {
     },
   ],
   approachMicro:
-    "Cenu pilotu řekneme až po analýze — do té doby by to byl jen odhad. Začínáme záměrně v malém.",
+    "Součástí analýzy je výpočet, kolik vás daný proces stojí dnes. Teprve podle toho se rozhodne, co se staví jako první. Cenu pilotu řekneme až po analýze.",
   aboutLabel: "Proč Full Canvas",
   aboutHead: "Platíte za výsledek, ne za prezentace.",
   aboutBody:
@@ -245,8 +285,8 @@ const cs: Content = {
     { k: "Pilotní AI", v: "od 120 000 Kč" },
     { k: "Weby", v: "od 80 000 Kč" },
   ],
-  faqLabel: "Časté otázky",
-  faqTitle: "Na co se ptají nejčastěji",
+  faqLabel: "FAQ",
+  faqTitle: "Otázky, které slyšíme nejčastěji",
   faqs: [
     {
       q: "Jak rychle to jde?",
@@ -254,7 +294,7 @@ const cs: Content = {
     },
     {
       q: "AI si přece vymýšlí.",
-      a: "Naše řešení odpovídá jen z vašich dokumentů a ke každé odpovědi přikládá zdroj — dokument a stranu. Když odpověď nezná, řekne to.",
+      a: "Naše řešení odpovídá jen z vašich dokumentů a ke každé odpovědi přikládá zdroj: dokument a stranu. Když odpověď nezná, řekne to.",
     },
     {
       q: "Co bude s našimi daty?",
@@ -276,16 +316,44 @@ const cs: Content = {
   footer: "© 2026 FULL CANVAS DIGITAL · IČO 06762336",
   navLabel: "Navigace",
   navHome: "Úvod",
-  navDemo: "Ukázka",
+  navDemo: "Živá ukázka",
+  nav: {
+    menuOpen: "Otevřít menu",
+    menuClose: "Zavřít menu",
+    services: "Služby",
+    how: "Jak pracujeme",
+    faq: "FAQ",
+    contact: "Kontakt",
+    footerServices: "Služby",
+    footerCompany: "Firma",
+  },
+  slider: {
+    prev: "Předchozí služba",
+    next: "Další služba",
+    goTo: "Přejít na službu",
+    moreAi: "Více o službě →",
+    moreBuild: "Popsat projekt →",
+    labelAi: "AI automatizace",
+    labelBuild: "Weby a aplikace",
+  },
+  product: {
+    label: "Živá ukázka",
+    title: "Tohle je skutečný systém, ne video.",
+    body: "Recepce odpoví pacientovi do minuty, nabídne tři volné termíny a potvrdí ten vybraný. Napište jako pacient a sledujte, co se stane. Stejný princip stavíme na faktury, poptávky a pohledávky.",
+    note: "Nic se neposílá skutečným lidem.",
+    cta: "Vyzkoušet živou ukázku →",
+    alt: "Aplikace Recepce: formulář pacienta vlevo, vpravo přehled kroků, které systém udělal, včetně odpovědi se třemi termíny",
+    todo: "TODO(Ondrej): nahradit statický snímek 30–60s záznamem obrazovky.",
+  },
+  footerTagline: "AI automatizace na konkrétní procesy. První výsledek v provozu do 30 dní.",
   demo: {
-    metaTitle: "Živá ukázka — Recepce | Full Canvas Digital",
     eyebrow: "RECEPCE · ŽIVÁ UKÁZKA",
     headPre: "Dotaz zodpovězený",
     headEm: "do minuty",
     headPost: ", termín domluvený bez recepce.",
     lead: "Tohle je skutečný systém, ne video. Napište jako pacient, kterýmkoli jazykem, a sledujte, co se stane. Nic se neposílá skutečným lidem.",
     frameTitle: "Recepce demo",
-    fallback: "Ukázka se právě nahrává — napište mi a ukážu vám ji naživo.",
+    fallback: "Ukázka se právě nahrává. Napište mi a ukážu vám ji naživo.",
     columns: [
       {
         num: "01",
@@ -303,6 +371,29 @@ const cs: Content = {
         body: "Analýza vašeho provozu, pilot za pevnou cenu, nasazení do dvou týdnů.",
       },
     ],
+    liveBadge: "Živý systém",
+    frameNote: "Ukázka běží na demo.fullcanvas.cz. Napište jako pacient, kterýmkoli jazykem.",
+    faqLabel: "FAQ",
+    faqTitle: "K ukázce",
+    faqs: [
+      {
+        q: "Je ukázka napojená na skutečný kalendář?",
+        a: "Ne, termíny jsou z testovacího kalendáře. U vás se napojí na systém, který už používáte. TODO(Ondrej): vyjmenovat podporované kalendáře a ambulantní systémy.",
+      },
+      {
+        q: "Co když pacient napíše něco, čemu systém nerozumí?",
+        a: "Předá to člověku se shrnutím. Nic neodhaduje, nediagnostikuje a neposílá bez vaší kontroly.",
+      },
+      {
+        q: "Kde běží data pacientů?",
+        a: "Ve vaší infrastruktuře nebo v EU cloudu. Ukázka neukládá nic, co do ní napíšete, déle než na dobu konverzace. TODO(Ondrej): potvrdit retenci v demo prostředí.",
+      },
+      {
+        q: "Funguje to i mimo ordinace?",
+        a: "Stejný princip stavíme na poptávky, faktury a pohledávky: zpráva přijde, systém ji roztřídí, připraví odpověď a člověk jen potvrdí.",
+      },
+    ],
+    ctaLine: "Chcete to na vlastních datech?",
   },
   form: {
     title: "Domluvit 15 minut",
@@ -337,11 +428,11 @@ const en: Content = {
   heroHeadA: "Your people retype data",
   heroHeadB: "you already have.",
   heroSub:
-    "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables — first result live within 30 days. No transformation lectures.",
+    "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables. First result live within 30 days. No transformation lectures.",
   heroSecondary: "What we automate ↓",
   heroDemoLink: "Live demo →",
   heroMicro:
-    "Fifteen minutes. You tell me where enquiries, orders or documents pile up — I'll tell you what to automate first, and what it would cost.",
+    "Fifteen minutes. You tell me where enquiries, orders or documents pile up, and I'll tell you what to automate first and what it would cost.",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "processing one invoice" },
     { value: null, suffix: "", display: "2.5 h → 30 min", label: "morning email triage" },
@@ -357,7 +448,7 @@ const en: Content = {
       num: "01",
       title: "Document extraction",
       body: "We read invoices and orders and push them straight into your ERP or Pohoda. No more retyping.",
-      note: "Send us 20 invoices — within a week you'll see what the system extracts. Free.",
+      note: "Send us 20 invoices. Within a week you'll see what the system extracts. Free.",
     },
     {
       num: "02",
@@ -413,7 +504,7 @@ const en: Content = {
       title: "Assessment",
       price: "40–80,000 CZK",
       meta: "1–2 weeks · fixed price",
-      body: "We walk your operations with the people who live in them. You get an automation plan ranked by return — with numbers.",
+      body: "We walk your operations with the people who live in them. You get an automation plan ranked by return, with numbers.",
     },
     {
       num: "02",
@@ -433,7 +524,7 @@ const en: Content = {
     },
   ],
   approachMicro:
-    "We quote the pilot after the assessment — before that it would only be a guess. We start small on purpose.",
+    "The assessment works out what the process costs you today. Only then do we decide what gets built first. We quote the pilot after the assessment.",
   aboutLabel: "Why Full Canvas",
   aboutHead: "You pay for results, not slideware.",
   aboutBody:
@@ -453,7 +544,7 @@ const en: Content = {
     },
     {
       q: "AI just makes things up.",
-      a: "Our system answers only from your documents and attaches a source to every answer — the document and page. When it doesn’t know, it says so.",
+      a: "Our system answers only from your documents and attaches a source to every answer: the document and page. When it doesn’t know, it says so.",
     },
     {
       q: "What happens to our data?",
@@ -475,16 +566,44 @@ const en: Content = {
   footer: "© 2026 FULL CANVAS DIGITAL · REG. NO. 06762336",
   navLabel: "Navigation",
   navHome: "Home",
-  navDemo: "Demo",
+  navDemo: "Live demo",
+  nav: {
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    services: "Services",
+    how: "How we work",
+    faq: "FAQ",
+    contact: "Contact",
+    footerServices: "Services",
+    footerCompany: "Company",
+  },
+  slider: {
+    prev: "Previous service",
+    next: "Next service",
+    goTo: "Go to service",
+    moreAi: "More about this service →",
+    moreBuild: "Describe your project →",
+    labelAi: "AI automation",
+    labelBuild: "Web & apps",
+  },
+  product: {
+    label: "Live demo",
+    title: "This is the real system, not a video.",
+    body: "The reception answers a patient within a minute, offers three free slots and confirms the chosen one. Write as a patient and watch what happens. We build the same principle for invoices, inquiries and receivables.",
+    note: "Nothing is sent to real people.",
+    cta: "Try the live demo →",
+    alt: "The Recepce app: a patient form on the left, on the right the steps the system took, including a reply with three slots",
+    todo: "TODO(Ondrej): replace the static screenshot with a 30–60 s screen recording.",
+  },
+  footerTagline: "AI automation for specific processes. First result live within 30 days.",
   demo: {
-    metaTitle: "Live demo — Reception | Full Canvas Digital",
     eyebrow: "RECEPTION · LIVE DEMO",
     headPre: "Answered",
     headEm: "within a minute",
     headPost: ", booked without a receptionist.",
     lead: "This is the real system, not a video. Write as a patient, in any language, and watch what happens. Nothing is sent to real people.",
     frameTitle: "Recepce demo",
-    fallback: "The demo is loading — write to me and I’ll show it live.",
+    fallback: "The demo is loading. Write to me and I’ll show it live.",
     columns: [
       {
         num: "01",
@@ -502,6 +621,29 @@ const en: Content = {
         body: "Analysis of your intake, fixed-price pilot, live in two weeks.",
       },
     ],
+    liveBadge: "Live system",
+    frameNote: "The demo runs at demo.fullcanvas.cz. Write as a patient, in any language.",
+    faqLabel: "FAQ",
+    faqTitle: "About the demo",
+    faqs: [
+      {
+        q: "Is the demo connected to a real calendar?",
+        a: "No, the slots come from a test calendar. For you it connects to the system you already use. TODO(Ondrej): list the supported calendars and practice systems.",
+      },
+      {
+        q: "What if a patient writes something the system doesn't understand?",
+        a: "It hands it to a person with a summary. It doesn't guess, doesn't diagnose and sends nothing without your review.",
+      },
+      {
+        q: "Where does patient data run?",
+        a: "On your infrastructure or in an EU cloud. The demo keeps nothing you type beyond the conversation. TODO(Ondrej): confirm retention in the demo environment.",
+      },
+      {
+        q: "Does it work outside clinics?",
+        a: "We build the same principle for inquiries, invoices and receivables: a message arrives, the system classifies it, drafts the reply and a person just confirms.",
+      },
+    ],
+    ctaLine: "Want it on your own data?",
   },
   form: {
     title: "Book 15 minutes",

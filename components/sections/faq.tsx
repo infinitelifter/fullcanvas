@@ -1,35 +1,43 @@
-"use client";
-
-import { useState } from "react";
-import type { Content } from "@/lib/content";
+import type { FaqItem } from "@/lib/content";
 import Reveal from "@/components/reveal";
 
-export default function Faq({ t }: { t: Content }) {
-  const [open, setOpen] = useState<Record<number, boolean>>({});
-
+/**
+ * <details name="…"> rather than a React-state accordion: every answer ships
+ * in the HTML (crawlers and AI read them all), the browser keeps one item
+ * open at a time natively, and it works without JavaScript. The first item is
+ * open by default so a visible answer is on screen immediately.
+ */
+export default function Faq({
+  id = "faq",
+  label,
+  title,
+  items,
+  group = "faq",
+}: {
+  id?: string;
+  label: string;
+  title: string;
+  items: FaqItem[];
+  /** The <details name> that makes the group exclusive; unique per page. */
+  group?: string;
+}) {
   return (
-    <section id="faq" className="faq">
-      <div className="faq__inner">
+    <section id={id} className="faq">
+      <div className="container faq__inner">
         <Reveal className="faq__head">
-          <div className="mono-label">{t.faqLabel}</div>
-          <h2 className="section-title">{t.faqTitle}</h2>
+          <div className="mono-label">{label}</div>
+          <h2 className="section-title">{title}</h2>
         </Reveal>
         <Reveal className="faq__list">
-          {t.faqs.map((faq, i) => (
-            <div key={i} className="faq__item">
-              <button
-                type="button"
-                className="faq__question"
-                aria-expanded={!!open[i]}
-                onClick={() => setOpen((prev) => ({ ...prev, [i]: !prev[i] }))}
-              >
-                <span>{faq.q}</span>
-                <span className="faq__sign" aria-hidden="true">
-                  {open[i] ? "–" : "+"}
-                </span>
-              </button>
-              {open[i] && <p className="faq__answer">{faq.a}</p>}
-            </div>
+          {items.map((faq, i) => (
+            <details key={i} className="faq__item" name={group} open={i === 0}>
+              <summary className="faq__question">
+                <span className="faq__num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="faq__q">{faq.q}</span>
+                <span className="faq__sign" aria-hidden="true" />
+              </summary>
+              <p className="faq__answer">{faq.a}</p>
+            </details>
           ))}
         </Reveal>
       </div>
