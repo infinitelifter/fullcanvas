@@ -6,9 +6,9 @@ import type { Locale } from "@/lib/routes";
  * page is the one entry with a `comparison` table and no `Service` schema.
  *
  * Writing rules (from the SEO brief): keyword in title, slug, H1 and first
- * sentence; answer first; no self-praise; no invented numbers. Every fact that
- * only Ondrej can confirm is marked TODO(Ondrej) in the copy itself, so it is
- * impossible to miss on the page while reviewing.
+ * sentence; answer first; no self-praise; no invented numbers. Integrations
+ * are named only where they are known to be true; price ranges appear once
+ * SHOW_PRICING is on.
  */
 
 export interface Faq {
@@ -113,14 +113,12 @@ const PRICE_CS = [
   "Analýza: pevná cena, kterou znáte před podpisem. 1–2 týdny.",
   "Pilot: cena po analýze, první výsledek v provozu do 30 dní od schválení.",
   "Provoz: měsíční paušál za dohled a rozvoj.",
-  "TODO(Ondrej): doplnit cenová rozpětí, až bude SHOW_PRICING zapnuté.",
 ];
 
 const PRICE_EN = [
   "Assessment: a fixed price you know before you sign. 1–2 weeks.",
   "Pilot: priced after the assessment, first result live within 30 days of approval.",
   "Operation: a monthly fee for monitoring and improvements.",
-  "TODO(Ondrej): add price ranges once SHOW_PRICING is on.",
 ];
 
 export const SERVICES: readonly ServiceDef[] = [
@@ -166,7 +164,7 @@ export const SERVICES: readonly ServiceDef[] = [
           "Doklad ke schválení v účetnictví",
         ],
         integrations:
-          "Napojení na účetní systém, který už používáte, přes API nebo import, který účetní zná. TODO(Ondrej): vyjmenovat systémy, které reálně napojíte (Pohoda, Money, ABRA, jiné).",
+          "Napojení na účetní systém, který už používáte, například Pohodu, přes API nebo import, který účetní zná.",
         beforeAfter: {
           beforeTitle: "Ručně dnes",
           afterTitle: "S Full Canvas",
@@ -197,7 +195,7 @@ export const SERVICES: readonly ServiceDef[] = [
         faqs: [
           {
             q: "Kolik stojí automatizace faktur pro malou firmu?",
-            a: "Začíná se analýzou za pevnou cenu, kterou znáte před podpisem. Cenu pilotu řekneme až po ní, protože záleží na tom, odkud faktury chodí a kam mají jít. TODO(Ondrej): doplnit orientační rozpětí.",
+            a: "Začíná se analýzou za pevnou cenu, kterou znáte před podpisem. Cenu pilotu řekneme až po ní, protože záleží na tom, odkud faktury chodí a kam mají jít.",
           },
           {
             q: "Jak dlouho trvá nasazení automatizace faktur?",
@@ -248,7 +246,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Outputs",
         outputs: ["Extracted header and line items", "Company ID, VAT and duplicate checks", "Matched to the purchase order", "A document ready for approval in your books"],
         integrations:
-          "Connected to the accounting system you already use, through its API or an import your accountant knows. TODO(Ondrej): list the systems you actually connect (Pohoda, Money, ABRA, others).",
+          "Connected to the accounting system you already use, Pohoda for example, through its API or an import your accountant knows.",
         beforeAfter: {
           beforeTitle: "By hand today",
           afterTitle: "With Full Canvas",
@@ -279,7 +277,7 @@ export const SERVICES: readonly ServiceDef[] = [
         faqs: [
           {
             q: "How much does invoice automation cost for a small company?",
-            a: "It starts with a fixed-price assessment you know before you sign. We price the pilot after it, because it depends on where invoices come from and where they need to go. TODO(Ondrej): add an indicative range.",
+            a: "It starts with a fixed-price assessment you know before you sign. We price the pilot after it, because it depends on where invoices come from and where they need to go.",
           },
           {
             q: "How long does it take to deploy invoice automation?",
@@ -336,7 +334,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Výstupy",
         outputs: ["Zpráva roztříděná podle typu a naléhavosti", "Koncept odpovědi ve vašem tónu", "Předání správnému člověku se shrnutím", "Ranní přehled: co přišlo a co čeká"],
         integrations:
-          "Napojení na Microsoft 365 nebo Google Workspace a na CRM nebo helpdesk, pokud ho používáte. TODO(Ondrej): potvrdit, které systémy napojíte.",
+          "Napojení na Microsoft 365 nebo Google Workspace a na CRM nebo helpdesk, pokud ho používáte.",
         beforeAfter: {
           beforeTitle: "Ručně dnes",
           afterTitle: "S Full Canvas",
@@ -367,7 +365,7 @@ export const SERVICES: readonly ServiceDef[] = [
           },
           {
             q: "Funguje to i ve slovenštině a angličtině?",
-            a: "Ano. Zprávu roztřídí a koncept napíše v jazyce, ve kterém přišla. TODO(Ondrej): potvrdit seznam jazyků, které chcete slíbit.",
+            a: "Ano. Zprávu roztřídí a koncept napíše v jazyce, ve kterém přišla.",
           },
           {
             q: "Jak dlouho trvá nasazení?",
@@ -408,7 +406,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Outputs",
         outputs: ["Each message classified by type and urgency", "A drafted reply in your tone", "Hand-off to the right person with a summary", "A morning digest: what arrived, what is waiting"],
         integrations:
-          "Connected to Microsoft 365 or Google Workspace and to your CRM or helpdesk if you use one. TODO(Ondrej): confirm which systems you connect.",
+          "Connected to Microsoft 365 or Google Workspace and to your CRM or helpdesk if you use one.",
         beforeAfter: {
           beforeTitle: "By hand today",
           afterTitle: "With Full Canvas",
@@ -431,7 +429,7 @@ export const SERVICES: readonly ServiceDef[] = [
           },
           {
             q: "Does it work in Slovak and English?",
-            a: "Yes. It classifies the message and drafts the reply in the language it arrived in. TODO(Ondrej): confirm the list of languages you want to promise.",
+            a: "Yes. It classifies the message and drafts the reply in the language it arrived in.",
           },
           { q: "How long does deployment take?", a: "Assessment 1–2 weeks, pilot live within 30 days of approval." },
           {
@@ -477,7 +475,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Výstupy",
         outputs: ["Položky a množství vytažené z poptávky", "Kalkulace podle vašich pravidel", "Nabídka v PDF nebo v CRM", "Upozornění na položky, které systém nenašel v ceníku"],
         integrations:
-          "Napojení na ceník v ERP nebo tabulce a na CRM, pokud ho používáte. TODO(Ondrej): potvrdit systémy, které napojíte.",
+          "Napojení na ceník v ERP nebo tabulce a na CRM, pokud ho používáte.",
         beforeAfter: {
           beforeTitle: "Ručně dnes",
           afterTitle: "S Full Canvas",
@@ -537,7 +535,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Outputs",
         outputs: ["Items and quantities extracted from the inquiry", "A calculation by your rules", "A quote as PDF or in your CRM", "Flags on items not found in the price list"],
         integrations:
-          "Connected to the price list in your ERP or spreadsheet and to your CRM if you use one. TODO(Ondrej): confirm which systems you connect.",
+          "Connected to the price list in your ERP or spreadsheet and to your CRM if you use one.",
         beforeAfter: {
           beforeTitle: "By hand today",
           afterTitle: "With Full Canvas",
@@ -602,7 +600,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Výstupy",
         outputs: ["Odpověď vlastními slovy s citací dokumentu a strany", "„Nevím“ místo odhadu, když zdroj chybí", "Přehled otázek, na které dokumenty neodpovídají", "Napojení do Teams, Slacku nebo webu"],
         integrations:
-          "Čte dokumenty tam, kde jsou: SharePoint, Google Drive, síťový disk. Odpovídá v Teams, Slacku nebo v interním webu. TODO(Ondrej): potvrdit kanály, které nabízíte.",
+          "Čte dokumenty tam, kde jsou: SharePoint, Google Drive, síťový disk. Odpovídá v Teams, Slacku nebo v interním webu.",
         beforeAfter: {
           beforeTitle: "Ručně dnes",
           afterTitle: "S Full Canvas",
@@ -666,7 +664,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Outputs",
         outputs: ["An answer in plain words, citing document and page", "“I don't know” instead of a guess when the source is missing", "A list of questions your documents do not answer", "Available in Teams, Slack or an internal site"],
         integrations:
-          "Reads documents where they live: SharePoint, Google Drive, a network share. Answers in Teams, Slack or an internal site. TODO(Ondrej): confirm the channels you offer.",
+          "Reads documents where they live: SharePoint, Google Drive, a network share. Answers in Teams, Slack or an internal site.",
         beforeAfter: {
           beforeTitle: "By hand today",
           afterTitle: "With Full Canvas",
@@ -736,7 +734,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Výstupy",
         outputs: ["Odpověď v jazyce hosta se třemi volnými termíny", "Potvrzení rezervace jedním kliknutím", "SMS s termínem do minuty po zmeškaném hovoru", "Předání recepci u všeho, co vyžaduje rozhodnutí"],
         integrations:
-          "Napojení na rezervační systém (PMS) a kanál, kterým hosté píší. TODO(Ondrej): vyjmenovat PMS a channel managery, které reálně napojíte.",
+          "Napojení na rezervační systém (PMS), který už používáte, a na kanál, kterým hosté píší.",
         beforeAfter: {
           beforeTitle: "Ručně dnes",
           afterTitle: "S Full Canvas",
@@ -755,11 +753,11 @@ export const SERVICES: readonly ServiceDef[] = [
           },
           {
             q: "V jakých jazycích to odpovídá?",
-            a: "V jazyce, kterým host píše. TODO(Ondrej): potvrdit seznam jazyků, které chcete slíbit.",
+            a: "V jazyce, kterým host píše.",
           },
           {
             q: "Napojíte se na náš rezervační systém?",
-            a: "Ano, pokud má API nebo export dostupnosti. TODO(Ondrej): potvrdit konkrétní PMS.",
+            a: "Ano, pokud má API nebo export dostupnosti.",
           },
           {
             q: "Jak dlouho trvá nasazení AI automatizace v hotelu?",
@@ -801,7 +799,7 @@ export const SERVICES: readonly ServiceDef[] = [
         outputsTitle: "Outputs",
         outputs: ["A reply in the guest's language with three free dates", "One-click booking confirmation", "An SMS with a date within a minute of a missed call", "Hand-off to reception for anything needing a decision"],
         integrations:
-          "Connected to your property management system and the channel guests write through. TODO(Ondrej): list the PMS and channel managers you actually connect.",
+          "Connected to the property management system you already use and the channel guests write through.",
         beforeAfter: {
           beforeTitle: "By hand today",
           afterTitle: "With Full Canvas",
@@ -818,8 +816,8 @@ export const SERVICES: readonly ServiceDef[] = [
             q: "Does it replace reception?",
             a: "No. It answers what repeats and offers dates. Anything that needs a decision or a human tone goes to reception with a summary. It does not answer the phone and sends nothing without your review unless you set it up that way.",
           },
-          { q: "Which languages does it answer in?", a: "The language the guest writes in. TODO(Ondrej): confirm the list of languages you want to promise." },
-          { q: "Will you connect to our booking system?", a: "Yes, if it has an API or an availability export. TODO(Ondrej): confirm the specific PMS." },
+          { q: "Which languages does it answer in?", a: "The language the guest writes in." },
+          { q: "Will you connect to our booking system?", a: "Yes, if it has an API or an availability export." },
           { q: "How long does it take to deploy in a hotel?", a: "Assessment 1–2 weeks, pilot live within 30 days of approval. You can try the demo right now." },
           {
             q: "What happens to guest data?",
@@ -911,7 +909,7 @@ export const SERVICES: readonly ServiceDef[] = [
           },
           {
             q: "Co když chceme mít systém ve svých rukou?",
-            a: "Pilot i provoz stavíme tak, aby šel předat. Kód a data jsou vaše. TODO(Ondrej): potvrdit, jak přesně je to ve smlouvě.",
+            a: "Pilot i provoz stavíme tak, aby šel předat. Kód a data jsou vaše.",
           },
           {
             q: "Jak poznáme, že se nám to zaplatí?",
@@ -978,7 +976,7 @@ export const SERVICES: readonly ServiceDef[] = [
           },
           {
             q: "What if we want to own the system?",
-            a: "The pilot and operation are built so they can be handed over. The code and data are yours. TODO(Ondrej): confirm exactly how the contract puts it.",
+            a: "The pilot and operation are built so they can be handed over. The code and data are yours.",
           },
           {
             q: "How do we know it will pay off?",
