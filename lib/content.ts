@@ -122,7 +122,6 @@ export interface ProductCopy {
   note: string;
   cta: string;
   alt: string;
-  todo: string;
 }
 
 export interface Content {
@@ -343,7 +342,6 @@ const cs: Content = {
     note: "Nic se neposílá skutečným lidem.",
     cta: "Vyzkoušet živou ukázku →",
     alt: "Aplikace Recepce: formulář pacienta vlevo, vpravo přehled kroků, které systém udělal, včetně odpovědi se třemi termíny",
-    todo: "TODO(Ondrej): nahradit statický snímek 30–60s záznamem obrazovky.",
   },
   footerTagline: "AI automatizace na konkrétní procesy. První výsledek v provozu do 30 dní.",
   demo: {
@@ -378,7 +376,7 @@ const cs: Content = {
     faqs: [
       {
         q: "Je ukázka napojená na skutečný kalendář?",
-        a: "Ne, termíny jsou z testovacího kalendáře. U vás se napojí na systém, který už používáte. TODO(Ondrej): vyjmenovat podporované kalendáře a ambulantní systémy.",
+        a: "Ne, termíny jsou z testovacího kalendáře. U vás se napojí na systém, který už používáte.",
       },
       {
         q: "Co když pacient napíše něco, čemu systém nerozumí?",
@@ -386,7 +384,7 @@ const cs: Content = {
       },
       {
         q: "Kde běží data pacientů?",
-        a: "Ve vaší infrastruktuře nebo v EU cloudu. Ukázka neukládá nic, co do ní napíšete, déle než na dobu konverzace. TODO(Ondrej): potvrdit retenci v demo prostředí.",
+        a: "Ukázka nemá žádnou databázi: co napíšete, se zpracuje a výsledek se vrátí jen na vaši obrazovku, nic se neukládá. Text dotazu projde přes API Anthropic (Claude), které vstupy nepoužívá k trénování a maže je do 30 dnů. Ostrý systém nasazujeme ve vaší infrastruktuře nebo v EU cloudu, s daty pod vaší kontrolou.",
       },
       {
         q: "Funguje to i mimo ordinace?",
@@ -593,7 +591,6 @@ const en: Content = {
     note: "Nothing is sent to real people.",
     cta: "Try the live demo →",
     alt: "The Recepce app: a patient form on the left, on the right the steps the system took, including a reply with three slots",
-    todo: "TODO(Ondrej): replace the static screenshot with a 30–60 s screen recording.",
   },
   footerTagline: "AI automation for specific processes. First result live within 30 days.",
   demo: {
@@ -628,7 +625,7 @@ const en: Content = {
     faqs: [
       {
         q: "Is the demo connected to a real calendar?",
-        a: "No, the slots come from a test calendar. For you it connects to the system you already use. TODO(Ondrej): list the supported calendars and practice systems.",
+        a: "No, the slots come from a test calendar. For you it connects to the system you already use.",
       },
       {
         q: "What if a patient writes something the system doesn't understand?",
@@ -636,7 +633,7 @@ const en: Content = {
       },
       {
         q: "Where does patient data run?",
-        a: "On your infrastructure or in an EU cloud. The demo keeps nothing you type beyond the conversation. TODO(Ondrej): confirm retention in the demo environment.",
+        a: "The demo has no database: what you type is processed and the result comes back only to your screen, nothing is stored. The text of your message goes through the Anthropic API (Claude), which does not use inputs for training and deletes them within 30 days. The production system runs on your infrastructure or in an EU cloud, with the data under your control.",
       },
       {
         q: "Does it work outside clinics?",
