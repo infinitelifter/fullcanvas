@@ -34,7 +34,6 @@ export default function Hero({ t, locale }: { t: Content; locale: Locale }) {
             {t.heroSecondary.replace(/\s*↓\s*$/, "")} <span className="hero__arrow">↓</span>
           </a>
         </div>
-        <div className="hero__micro">{t.heroMicro}</div>
       </div>
       <Stats t={t} />
     </section>

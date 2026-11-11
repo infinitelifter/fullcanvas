@@ -1,5 +1,6 @@
 import { SHOW_PRICING, type Content } from "@/lib/content";
 import Reveal from "@/components/reveal";
+import CropMarks from "@/components/crop-marks";
 
 export default function About({ t }: { t: Content }) {
   return (
@@ -7,8 +8,10 @@ export default function About({ t }: { t: Content }) {
       <div className="container about__inner">
         <Reveal className="about__copy">
           <div className="mono-label">{t.aboutLabel}</div>
-          <h2 className="about__head">{t.aboutHead}</h2>
-          <p className="about__body">{t.aboutBody}</p>
+          <CropMarks className="about__crop">
+            <h2 className="about__head">{t.aboutHead}</h2>
+            <p className="about__body">{t.aboutBody}</p>
+          </CropMarks>
         </Reveal>
       </div>
       {SHOW_PRICING && (

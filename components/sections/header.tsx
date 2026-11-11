@@ -9,9 +9,10 @@ import Logo from "@/components/logo";
 import { useBooking } from "@/components/booking";
 
 /**
- * Language toggle, centred wordmark, the CTA and one burger button. The nav
- * lives in a full-screen sheet; the hairline along the bottom edge shows how
- * far down the page the reader is.
+ * Mobile and tablet: language toggle, centred wordmark, the CTA and one burger
+ * button. Desktop: wordmark and the main links on the left, CTA, language
+ * toggle and burger on the right. The full nav lives in a full-screen sheet;
+ * the hairline along the bottom edge shows how far down the page the reader is.
  */
 export default function Header({
   t,
@@ -77,49 +78,72 @@ export default function Header({
     { href: anchor("kontakt"), label: t.nav.contact },
   ];
 
+  // The most important sections, shown inline on desktop only; the sheet keeps the full list.
+  const primary = [
+    { href: anchor("sluzby"), label: t.nav.services },
+    { href: anchor("postup"), label: t.nav.how },
+    { href: pathFor("demo", locale), label: t.navDemo },
+    { href: anchor("faq"), label: t.nav.faq },
+  ];
+
+  /*
+   * One DOM for both layouts (see .site-header in globals.css):
+   * - below 1100px: language toggle | centred wordmark | CTA + burger
+   * - desktop: wordmark + primary links on the left, CTA, toggle, burger on the right
+   */
   return (
     <header className="site-header">
       <div className="container site-header__inner">
-        {/* Real links, not state: crawlers must be able to reach both locales. */}
-        <div className="lang-toggle">
-          <Link
-            href={pathFor(routeKey, "cs")}
-            hrefLang="cs"
-            className={locale === "cs" ? "is-active" : ""}
-            aria-current={locale === "cs" ? "true" : undefined}
-          >
-            CS
-          </Link>
-          <Link
-            href={pathFor(routeKey, "en")}
-            hrefLang="en"
-            className={locale === "en" ? "is-active" : ""}
-            aria-current={locale === "en" ? "true" : undefined}
-          >
-            EN
-          </Link>
-        </div>
-
-        <Link href={home} aria-label="Full Canvas Digital" className="site-header__logo">
+        <Link href={home} aria-label="Full Canvas" className="site-header__logo">
           <Logo />
         </Link>
 
+        <nav className="site-header__nav" aria-label={t.navLabel}>
+          {primary.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="site-header__end">
-          <button type="button" onClick={openBooking} className="btn-header">
-            {t.ctaShort}
-          </button>
-          <button
-            type="button"
-            className="burger"
-            aria-label={t.nav.menuOpen}
-            aria-expanded={menuOpen}
-            aria-controls={sheetId}
-            onClick={() => setMenuOpen(true)}
-          >
-            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-              <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </button>
+          {/* Real links, not state: crawlers must be able to reach both locales. */}
+          <div className="lang-toggle site-header__lang">
+            <Link
+              href={pathFor(routeKey, "cs")}
+              hrefLang="cs"
+              className={locale === "cs" ? "is-active" : ""}
+              aria-current={locale === "cs" ? "true" : undefined}
+            >
+              CS
+            </Link>
+            <Link
+              href={pathFor(routeKey, "en")}
+              hrefLang="en"
+              className={locale === "en" ? "is-active" : ""}
+              aria-current={locale === "en" ? "true" : undefined}
+            >
+              EN
+            </Link>
+          </div>
+
+          <div className="site-header__actions">
+            <button type="button" onClick={openBooking} className="btn-header">
+              {t.ctaShort}
+            </button>
+            <button
+              type="button"
+              className="burger"
+              aria-label={t.nav.menuOpen}
+              aria-expanded={menuOpen}
+              aria-controls={sheetId}
+              onClick={() => setMenuOpen(true)}
+            >
+              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 

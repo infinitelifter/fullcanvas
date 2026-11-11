@@ -27,8 +27,8 @@ export default function SiteFooter({
       <div className="container site-footer__inner">
         <div className="site-footer__grid">
           <div className="site-footer__brand">
-            <Link href={home} aria-label="Full Canvas Digital" className="site-footer__logo">
-              <Logo fill="#F5F2EE" width={184} height={53} />
+            <Link href={home} aria-label="Full Canvas" className="site-footer__logo">
+              <Logo fill="#F5F2EE" width={196} height={19} />
             </Link>
             <div className="site-footer__brand-bottom">
               <p className="site-footer__tagline">{t.footerTagline}</p>

@@ -25,6 +25,8 @@ export default function ShowProduct({ t, locale }: { t: Content; locale: Locale 
           </Link>
         </Reveal>
         <Reveal className="product__frame">
+          {/* The "canvas": a dark frame and a brush stroke behind the screenshot's bottom-right corner. */}
+          <img src="/canvas-brush.png" alt="" aria-hidden="true" className="product__canvas" width={441} height={577} loading="lazy" decoding="async" />
           <div className="browser">
             <div className="browser__bar" aria-hidden="true">
               <span className="browser__dot" />
