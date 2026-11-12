@@ -1,6 +1,6 @@
-import Link from "next/link";
 import type { Content } from "@/lib/content";
-import { pathFor, type Locale } from "@/lib/routes";
+import type { Locale } from "@/lib/routes";
+import { demoHref } from "@/lib/demo";
 import { BookButton } from "@/components/booking";
 import HeroSmoke from "@/components/hero-smoke";
 import Stats from "@/components/sections/stats";
@@ -27,14 +27,13 @@ export default function Hero({ t, locale }: { t: Content; locale: Locale }) {
         <p className="hero__sub">{t.heroSub}</p>
         <div className="hero__actions">
           <BookButton className="btn-primary">{t.ctaPrimary}</BookButton>
-          <Link href={pathFor("demo", locale)} className="btn-ghost">
+          <a href={demoHref(locale)} target="_blank" rel="noopener" className="btn-ghost">
             {t.heroDemoLink}
-          </Link>
+          </a>
           <a href="#sluzby" className="hero__secondary">
             {t.heroSecondary.replace(/\s*↓\s*$/, "")} <span className="hero__arrow">↓</span>
           </a>
         </div>
-        <div className="hero__micro">{t.heroMicro}</div>
       </div>
       <Stats t={t} />
     </section>

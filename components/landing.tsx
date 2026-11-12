@@ -2,6 +2,7 @@ import { content } from "@/lib/content";
 import type { Locale } from "@/lib/routes";
 import PageShell from "@/components/page-shell";
 import Hero from "@/components/sections/hero";
+import Trust from "@/components/sections/trust";
 import Services from "@/components/sections/services";
 import Approach from "@/components/sections/approach";
 import About from "@/components/sections/about";
@@ -15,6 +16,7 @@ export default function Landing({ locale }: { locale: Locale }) {
   return (
     <PageShell locale={locale} routeKey="home">
       <Hero t={t} locale={locale} />
+      <Trust t={t} />
       <Services t={t} locale={locale} />
       <Approach t={t} />
       <About t={t} />

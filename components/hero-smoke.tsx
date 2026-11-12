@@ -14,6 +14,9 @@ const BASE = [27, 26, 32] as const; // --dark
 const WINE = [124, 45, 70] as const; // --accent
 const MAUVE = [201, 139, 160] as const; // --mauve
 
+/** Seconds into the animation that the first frame is drawn at. */
+const START = 15;
+
 function makeSmoke(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext("2d", { alpha: false });
   if (!ctx) return null;
@@ -66,7 +69,10 @@ function makeSmoke(canvas: HTMLCanvasElement) {
   const fbm = (x: number, y: number, z: number) =>
     noise(x, y, z) * 0.6 + noise(x * 2.3, y * 2.3, z * 1.4) * 0.28 + noise(x * 4.7, y * 4.7, z * 1.9) * 0.12;
 
-  let t = 0;
+  // Start a little way into the field. At t = 0 this seed is almost empty for
+  // the first ten seconds (about 5 % coverage); here it opens
+  // around 15 % and keeps building.
+  let t = START;
   return function frame(dt: number) {
     t += dt;
     const s = 2.2 / W;

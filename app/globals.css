@@ -21,6 +21,21 @@
   --hairline-strong: rgba(38, 36, 44, 0.16);
   --hairline-on-dark: rgba(245, 242, 238, 0.14);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Height of the sticky header, border included. The full-height hero
+     subtracts it so its bottom edge lands on the bottom of the screen. */
+  --header-h: 92px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --header-h: 77px;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --header-h: 69px;
+  }
 }
 
 * {
@@ -111,11 +126,11 @@ a:hover {
   backdrop-filter: saturate(150%) blur(12px);
   -webkit-backdrop-filter: saturate(150%) blur(12px);
   border-bottom: 1px solid var(--hairline);
+  height: var(--header-h);
 }
 
 .site-header__inner {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -336,12 +351,6 @@ a:hover {
   color: #fff;
 }
 
-.hero__micro {
-  margin-top: 18px;
-  font-size: 14px;
-  color: var(--on-dark-dim);
-}
-
 /* ---------- services ---------- */
 .services {
   scroll-margin-top: 72px;
@@ -492,7 +501,14 @@ a:hover {
 
 .about__inner {
   padding-top: 96px;
-  padding-bottom: 60px;
+  padding-bottom: 112px;
+}
+
+@media (max-width: 720px) {
+  .about__inner {
+    padding-top: 72px;
+    padding-bottom: 76px;
+  }
 }
 
 .about__copy {
@@ -689,8 +705,6 @@ a:hover {
 
 @media (max-width: 560px) {
   .site-header__inner {
-    padding-top: 12px;
-    padding-bottom: 12px;
     gap: 8px;
   }
 
@@ -1050,11 +1064,12 @@ button.btn-light {
 }
 
 .services__note {
-  margin: 34px 0 0;
+  margin: 34px auto 0;
   font-size: 17px;
   line-height: 1.5;
   color: var(--muted);
   max-width: 34em;
+  text-align: center;
 }
 
 @media (max-width: 720px) {
@@ -1077,38 +1092,24 @@ button.btn-light {
   padding: 44px 0 10px;
 }
 
-.demo-frame {
-  display: block;
-  width: 100%;
-  height: min(1100px, 90vh);
-  border: 0;
-  border-radius: 18px;
-  background: var(--card-bg);
-  box-shadow: 0 18px 50px rgba(27, 26, 32, 0.1);
-}
-
-/* The demo stacks its columns on narrow screens, so it needs real height
-   rather than a viewport fraction. */
-@media (max-width: 860px) {
-  .demo-frame {
-    height: 1450px;
-  }
-}
-
-.demo-fallback {
-  background: var(--card-bg);
-  border: 1px solid var(--hairline-mid);
-  border-radius: 18px;
-  padding: 48px 40px 52px;
+/* The demo is linked, not embedded: a screenshot in a window, the button
+   that opens the app in a new tab, and a one-line note, centred. */
+.demo-embed__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.demo-fallback__text {
-  margin: 0 auto 28px;
-  max-width: 28em;
-  font-size: 19px;
-  line-height: 1.5;
-  color: var(--ink-soft);
+.demo-embed .browser--demo {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.demo-embed__open {
+  display: inline-block;
+  margin-top: 34px;
 }
 
 .demo-cta {
@@ -1131,12 +1132,10 @@ button.btn-light {
     padding-top: 28px;
   }
 
-  .demo-fallback {
-    padding: 34px 22px 38px;
-  }
-
-  .demo-fallback__text {
-    font-size: 17px;
+  .demo-embed__open {
+    width: 100%;
+    margin-top: 26px;
+    text-align: center;
   }
 
   .demo-cta {
@@ -1315,7 +1314,9 @@ button.btn-light {
 
 /* ---------- hero: full viewport, smoke, docked stats ---------- */
 .hero--full {
-  min-height: 100svh;
+  /* The header sits above the hero in the flow, so take its height off. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1345,8 +1346,27 @@ button.btn-light {
 }
 
 .hero--full .hero__content {
+  width: 100%;
   padding-top: 120px;
   padding-bottom: 88px;
+}
+
+@media (min-width: 721px) {
+  .hero--full .hero__kicker {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero--full .hero__title {
+    font-size: clamp(44px, 4.6vw, 66px);
+    max-width: 11em;
+  }
+
+  .hero--full .hero__sub {
+    max-width: 29em;
+  }
 }
 
 .btn-ghost {
@@ -1439,6 +1459,15 @@ button.btn-light {
   position: relative;
   height: 420px;
   overflow: hidden;
+}
+
+/* Clip only sideways (the cards stacked left and right); the active card's
+   shadow may hang below the stage. `overflow: clip` allows mixing axes. */
+@supports (overflow: clip) {
+  .slider__stage {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
 }
 
 .scard {
@@ -1980,12 +2009,6 @@ button.btn-light {
 }
 
 /* ---------- demo page: app window + CTA line ---------- */
-.browser--demo .demo-frame {
-  border-radius: 0;
-  box-shadow: none;
-  background: var(--canvas);
-}
-
 .browser--demo .browser__bar {
   height: 42px;
 }
@@ -2543,5 +2566,279 @@ button.btn-light {
   .faq__sign,
   .scard__more {
     transition: none;
+  }
+}
+
+/* ---------- trusted by: client logos under the hero ---------- */
+.trust {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.trust__inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.trust__label {
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.trust__viewport {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+
+.trust__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: trust-scroll 48s linear infinite;
+}
+
+.trust:hover .trust__track,
+.trust:focus-within .trust__track,
+.trust.is-paused .trust__track {
+  animation-play-state: paused;
+}
+
+/* Every item carries its own side padding, so the seam between the two
+   copies is as wide as any other gap and -50% lands exactly on the start. */
+.trust__item {
+  flex-shrink: 0;
+  padding: 0 60px;
+}
+
+.trust__item img {
+  display: block;
+  width: auto;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.trust__item img:hover {
+  opacity: 0.8;
+}
+
+.trust__toggle {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.trust__toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@keyframes trust-scroll {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust__track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 22px;
+  }
+
+  .trust__item[aria-hidden="true"],
+  .trust__toggle {
+    display: none;
+  }
+
+  .trust__viewport {
+    mask-image: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .trust__inner {
+    flex-wrap: wrap;
+    gap: 18px 16px;
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+
+  .trust__label {
+    flex-basis: calc(100% - 48px);
+  }
+
+  .trust__toggle {
+    order: 2;
+  }
+
+  .trust__viewport {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .trust__item {
+    padding: 0 34px;
+  }
+
+  .trust__item img {
+    height: auto;
+    max-height: 30px;
+  }
+}
+
+/* ---------- crop marks ---------- */
+.crop {
+  --crop-gap: 12px;
+  --crop-len: 22px;
+  position: relative;
+  display: inline-block;
+  padding: 18px 26px;
+  margin: 6px 0 14px -26px;
+}
+
+.crop__corner {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.crop__corner--tl {
+  top: 0;
+  left: 0;
+}
+
+.crop__corner--tr {
+  top: 0;
+  right: 0;
+}
+
+.crop__corner--bl {
+  bottom: 0;
+  left: 0;
+}
+
+.crop__corner--br {
+  bottom: 0;
+  right: 0;
+}
+
+.crop__corner::before,
+.crop__corner::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  transition: scale 0.7s var(--ease-out) 0.35s;
+}
+
+/* horizontal tick, outside the box */
+.crop__corner::before {
+  width: var(--crop-len);
+  height: 1.5px;
+  top: -0.75px;
+}
+
+/* vertical tick, outside the box */
+.crop__corner::after {
+  width: 1.5px;
+  height: var(--crop-len);
+  left: -0.75px;
+}
+
+.crop__corner--tl::before,
+.crop__corner--bl::before {
+  right: var(--crop-gap);
+  transform-origin: right;
+}
+
+.crop__corner--tr::before,
+.crop__corner--br::before {
+  left: var(--crop-gap);
+  transform-origin: left;
+}
+
+.crop__corner--tl::after,
+.crop__corner--tr::after {
+  bottom: var(--crop-gap);
+  transform-origin: bottom;
+}
+
+.crop__corner--bl::after,
+.crop__corner--br::after {
+  top: var(--crop-gap);
+  transform-origin: top;
+}
+
+/* Draw in with the surrounding reveal. */
+.reveal:not(.is-revealed) .crop__corner::before {
+  scale: 0 1;
+}
+
+.reveal:not(.is-revealed) .crop__corner::after {
+  scale: 1 0;
+}
+
+.about__crop {
+  display: block;
+  margin-bottom: 0;
+}
+
+/* Phones: no side padding, the ticks live in the container's gutter. */
+@media (max-width: 720px) {
+  .crop {
+    --crop-len: 12px;
+    --crop-gap: 6px;
+    padding: 14px 0;
+    margin-left: 0;
+  }
+}
+
+/* ---------- live demo: the canvas behind the screenshot ---------- */
+.product__frame {
+  position: relative;
+  isolation: isolate;
+}
+
+.product__canvas {
+  position: absolute;
+  z-index: -1;
+  right: -11%;
+  bottom: -24%;
+  width: 44%;
+  height: auto;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .product__canvas {
+    right: -4%;
+    bottom: -18%;
+    width: 40%;
   }
 }

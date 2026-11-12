@@ -83,8 +83,8 @@ export interface DemoCopy {
   headEm: string;
   headPost: string;
   lead: string;
-  frameTitle: string;
-  fallback: string;
+  /** Label of the button and screenshot link that open the demo. */
+  open: string;
   columns: DemoColumn[];
   liveBadge: string;
   frameNote: string;
@@ -133,7 +133,9 @@ export interface Content {
   heroSub: string;
   heroSecondary: string;
   heroDemoLink: string;
-  heroMicro: string;
+  trustLabel: string;
+  trustPause: string;
+  trustPlay: string;
   stats: Stat[];
   servicesLabel: string;
   servicesTitle: string;
@@ -171,17 +173,18 @@ export interface Content {
 }
 
 const cs: Content = {
-  ctaShort: "Domluvit 15 minut",
-  ctaPrimary: "Domluvit 15 minut",
+  ctaShort: "Nezávazná konzultace",
+  ctaPrimary: "Nezávazná konzultace",
   heroKicker: "AI automatizace pro firmy",
-  heroHeadA: "Vaši lidé přepisují data,",
-  heroHeadB: "která už dávno máte.",
+  heroHeadA: "Méně ruční práce, nižší náklady.",
+  heroHeadB: "Automatizace pro moderní firmy.",
   heroSub:
     "Full Canvas staví AI automatizace na konkrétní procesy. Faktury, e-maily, nabídky, pohledávky. První výsledek v provozu do 30 dní. Žádné přednášky o transformaci.",
   heroSecondary: "Co automatizujeme ↓",
   heroDemoLink: "Živá ukázka →",
-  heroMicro:
-    "Patnáct minut. Řeknete mi, kde se vám hromadí dotazy, objednávky nebo doklady, a já vám řeknu, co by šlo automatizovat jako první a za kolik.",
+  trustLabel: "Důvěřují nám",
+  trustPause: "Zastavit posouvání log",
+  trustPlay: "Spustit posouvání log",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "zpracování jedné faktury" },
     { value: null, suffix: "", display: "2,5 h → 30 min", label: "ranní třídění e-mailů" },
@@ -350,8 +353,7 @@ const cs: Content = {
     headEm: "do minuty",
     headPost: ", termín domluvený bez recepce.",
     lead: "Tohle je skutečný systém, ne video. Napište jako pacient, kterýmkoli jazykem, a sledujte, co se stane. Nic se neposílá skutečným lidem.",
-    frameTitle: "Recepce demo",
-    fallback: "Ukázka se právě nahrává. Napište mi a ukážu vám ji naživo.",
+    open: "Otevřít živou ukázku ↗",
     columns: [
       {
         num: "01",
@@ -370,7 +372,7 @@ const cs: Content = {
       },
     ],
     liveBadge: "Živý systém",
-    frameNote: "Ukázka běží na demo.fullcanvas.cz. Napište jako pacient, kterýmkoli jazykem.",
+    frameNote: "Ukázka se otevře v novém okně na demo.fullcanvas.cz. Napište jako pacient, kterýmkoli jazykem.",
     faqLabel: "FAQ",
     faqTitle: "K ukázce",
     faqs: [
@@ -394,7 +396,7 @@ const cs: Content = {
     ctaLine: "Chcete to na vlastních datech?",
   },
   form: {
-    title: "Domluvit 15 minut",
+    title: "Nezávazná konzultace",
     subtitle:
       "Napište pár vět o svém provozu. Ozveme se do jednoho pracovního dne s termínem a prvním odhadem.",
     name: "Jméno a příjmení",
@@ -420,17 +422,18 @@ const cs: Content = {
 };
 
 const en: Content = {
-  ctaShort: "Book 15 minutes",
-  ctaPrimary: "Book 15 minutes",
+  ctaShort: "Free consultation",
+  ctaPrimary: "Free consultation",
   heroKicker: "AI automation for companies",
-  heroHeadA: "Your people retype data",
-  heroHeadB: "you already have.",
+  heroHeadA: "Less manual work, lower costs.",
+  heroHeadB: "Automation for modern companies.",
   heroSub:
     "Full Canvas builds AI automation for specific processes. Invoices, email, quotes, receivables. First result live within 30 days. No transformation lectures.",
   heroSecondary: "What we automate ↓",
   heroDemoLink: "Live demo →",
-  heroMicro:
-    "Fifteen minutes. You tell me where enquiries, orders or documents pile up, and I'll tell you what to automate first and what it would cost.",
+  trustLabel: "Trusted by",
+  trustPause: "Pause the logo scroll",
+  trustPlay: "Play the logo scroll",
   stats: [
     { value: null, suffix: "", display: "8 min → 6 s", label: "processing one invoice" },
     { value: null, suffix: "", display: "2.5 h → 30 min", label: "morning email triage" },
@@ -599,8 +602,7 @@ const en: Content = {
     headEm: "within a minute",
     headPost: ", booked without a receptionist.",
     lead: "This is the real system, not a video. Write as a patient, in any language, and watch what happens. Nothing is sent to real people.",
-    frameTitle: "Recepce demo",
-    fallback: "The demo is loading. Write to me and I’ll show it live.",
+    open: "Open the live demo ↗",
     columns: [
       {
         num: "01",
@@ -619,7 +621,7 @@ const en: Content = {
       },
     ],
     liveBadge: "Live system",
-    frameNote: "The demo runs at demo.fullcanvas.cz. Write as a patient, in any language.",
+    frameNote: "The demo opens in a new tab at demo.fullcanvas.cz. Write as a patient, in any language.",
     faqLabel: "FAQ",
     faqTitle: "About the demo",
     faqs: [
@@ -643,7 +645,7 @@ const en: Content = {
     ctaLine: "Want it on your own data?",
   },
   form: {
-    title: "Book 15 minutes",
+    title: "Free consultation",
     subtitle:
       "Tell us a few sentences about your operations. We'll come back within one working day with a slot and a first estimate.",
     name: "Full name",
