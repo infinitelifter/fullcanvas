@@ -83,8 +83,8 @@ export interface DemoCopy {
   headEm: string;
   headPost: string;
   lead: string;
-  frameTitle: string;
-  fallback: string;
+  /** Label of the button and screenshot link that open the demo. */
+  open: string;
   columns: DemoColumn[];
   liveBadge: string;
   frameNote: string;
@@ -353,8 +353,7 @@ const cs: Content = {
     headEm: "do minuty",
     headPost: ", termín domluvený bez recepce.",
     lead: "Tohle je skutečný systém, ne video. Napište jako pacient, kterýmkoli jazykem, a sledujte, co se stane. Nic se neposílá skutečným lidem.",
-    frameTitle: "Recepce demo",
-    fallback: "Ukázka se právě nahrává. Napište mi a ukážu vám ji naživo.",
+    open: "Otevřít živou ukázku ↗",
     columns: [
       {
         num: "01",
@@ -373,7 +372,7 @@ const cs: Content = {
       },
     ],
     liveBadge: "Živý systém",
-    frameNote: "Ukázka běží na demo.fullcanvas.cz. Napište jako pacient, kterýmkoli jazykem.",
+    frameNote: "Ukázka se otevře v novém okně na demo.fullcanvas.cz. Napište jako pacient, kterýmkoli jazykem.",
     faqLabel: "FAQ",
     faqTitle: "K ukázce",
     faqs: [
@@ -603,8 +602,7 @@ const en: Content = {
     headEm: "within a minute",
     headPost: ", booked without a receptionist.",
     lead: "This is the real system, not a video. Write as a patient, in any language, and watch what happens. Nothing is sent to real people.",
-    frameTitle: "Recepce demo",
-    fallback: "The demo is loading. Write to me and I’ll show it live.",
+    open: "Open the live demo ↗",
     columns: [
       {
         num: "01",
@@ -623,7 +621,7 @@ const en: Content = {
       },
     ],
     liveBadge: "Live system",
-    frameNote: "The demo runs at demo.fullcanvas.cz. Write as a patient, in any language.",
+    frameNote: "The demo opens in a new tab at demo.fullcanvas.cz. Write as a patient, in any language.",
     faqLabel: "FAQ",
     faqTitle: "About the demo",
     faqs: [

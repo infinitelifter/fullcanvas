@@ -9,9 +9,9 @@ import DemoFrame from "@/components/demo-frame";
 import { BookButton } from "@/components/booking";
 
 /**
- * /demo: the real Recepce app in a window, with the text crawlers and AI need
- * around it (H1, lead, how it works, FAQ, CTA). The app itself is unchanged;
- * it only hides its own header when loaded with ?embed=1.
+ * /demo: the way into the real Recepce app (a screenshot and a button that
+ * open demo.fullcanvas.cz in a new tab), with the text crawlers and AI need
+ * around it (H1, lead, how it works, FAQ, CTA).
  */
 export default function DemoView({ locale }: { locale: Locale }) {
   const t = content[locale];

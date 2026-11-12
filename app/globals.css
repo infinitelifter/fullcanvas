@@ -21,6 +21,21 @@
   --hairline-strong: rgba(38, 36, 44, 0.16);
   --hairline-on-dark: rgba(245, 242, 238, 0.14);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Height of the sticky header, border included. The full-height hero
+     subtracts it so its bottom edge lands on the bottom of the screen. */
+  --header-h: 92px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --header-h: 77px;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --header-h: 69px;
+  }
 }
 
 * {
@@ -111,34 +126,19 @@ a:hover {
   backdrop-filter: saturate(150%) blur(12px);
   -webkit-backdrop-filter: saturate(150%) blur(12px);
   border-bottom: 1px solid var(--hairline);
+  height: var(--header-h);
 }
 
 .site-header__inner {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 24px;
 }
 
-/* Below 1100px: toggle | centred wordmark | CTA + burger. The end group
-   dissolves so its two children land in the outer columns. */
-.site-header__end {
-  display: contents;
-}
-
-.site-header__lang {
-  grid-column: 1;
-  grid-row: 1;
-  justify-self: start;
-}
-
-.site-header__nav {
-  display: none;
-}
-
 .lang-toggle {
+  justify-self: start;
   display: flex;
   align-items: center;
   font-family: var(--font-mono), monospace;
@@ -164,69 +164,16 @@ a:hover {
 }
 
 .site-header__logo {
-  grid-column: 2;
-  grid-row: 1;
   justify-self: center;
   display: flex;
   align-items: center;
 }
 
-.site-header__actions {
-  grid-column: 3;
-  grid-row: 1;
+.site-header__end {
   justify-self: end;
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.site-header__nav a {
-  font-size: 15px;
-  letter-spacing: 0.01em;
-  color: var(--ink-soft);
-  white-space: nowrap;
-  transition: color 0.2s;
-}
-
-.site-header__nav a:hover {
-  color: var(--accent);
-}
-
-/* Desktop: wordmark and the main links left; toggle, CTA, burger right. */
-@media (min-width: 1100px) {
-  .site-header__inner {
-    display: flex;
-    gap: 40px;
-  }
-
-  .site-header__nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-right: auto;
-  }
-
-  .site-header__end {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .site-header__actions {
-    display: contents;
-  }
-
-  .site-header__lang {
-    order: 1;
-  }
-
-  .btn-header {
-    order: 2;
-  }
-
-  .burger {
-    order: 3;
-  }
 }
 
 .btn-header {
@@ -742,7 +689,7 @@ a:hover {
 
   .site-header__logo svg {
     width: 150px;
-    height: 15px;
+    height: 43px;
   }
 
   .btn-header {
@@ -758,14 +705,12 @@ a:hover {
 
 @media (max-width: 560px) {
   .site-header__inner {
-    padding-top: 12px;
-    padding-bottom: 12px;
     gap: 8px;
   }
 
   .site-header__logo svg {
-    width: 120px;
-    height: 12px;
+    width: 116px;
+    height: 33px;
   }
 
   .lang-toggle {
@@ -1147,38 +1092,24 @@ button.btn-light {
   padding: 44px 0 10px;
 }
 
-.demo-frame {
-  display: block;
-  width: 100%;
-  height: min(1100px, 90vh);
-  border: 0;
-  border-radius: 18px;
-  background: var(--card-bg);
-  box-shadow: 0 18px 50px rgba(27, 26, 32, 0.1);
-}
-
-/* The demo stacks its columns on narrow screens, so it needs real height
-   rather than a viewport fraction. */
-@media (max-width: 860px) {
-  .demo-frame {
-    height: 1450px;
-  }
-}
-
-.demo-fallback {
-  background: var(--card-bg);
-  border: 1px solid var(--hairline-mid);
-  border-radius: 18px;
-  padding: 48px 40px 52px;
+/* The demo is linked, not embedded: a screenshot in a window, the button
+   that opens the app in a new tab, and a one-line note, centred. */
+.demo-embed__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.demo-fallback__text {
-  margin: 0 auto 28px;
-  max-width: 28em;
-  font-size: 19px;
-  line-height: 1.5;
-  color: var(--ink-soft);
+.demo-embed .browser--demo {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.demo-embed__open {
+  display: inline-block;
+  margin-top: 34px;
 }
 
 .demo-cta {
@@ -1201,12 +1132,10 @@ button.btn-light {
     padding-top: 28px;
   }
 
-  .demo-fallback {
-    padding: 34px 22px 38px;
-  }
-
-  .demo-fallback__text {
-    font-size: 17px;
+  .demo-embed__open {
+    width: 100%;
+    margin-top: 26px;
+    text-align: center;
   }
 
   .demo-cta {
@@ -1385,7 +1314,9 @@ button.btn-light {
 
 /* ---------- hero: full viewport, smoke, docked stats ---------- */
 .hero--full {
-  min-height: 100svh;
+  /* The header sits above the hero in the flow, so take its height off. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2078,12 +2009,6 @@ button.btn-light {
 }
 
 /* ---------- demo page: app window + CTA line ---------- */
-.browser--demo .demo-frame {
-  border-radius: 0;
-  box-shadow: none;
-  background: var(--canvas);
-}
-
 .browser--demo .browser__bar {
   height: 42px;
 }
