@@ -3,6 +3,7 @@ import type { Content } from "@/lib/content";
 import { pathFor, routesInGroup, type Locale } from "@/lib/routes";
 import { serviceCopy } from "@/lib/services";
 import Logo from "@/components/logo";
+import { CookieSettingsButton } from "@/components/consent";
 
 /**
  * Three columns: wordmark + line + email, the service pages, the company
@@ -57,7 +58,12 @@ export default function SiteFooter({
         </div>
 
         <div className="site-footer__bottom">
-          <div className="site-footer__meta">{t.footer}</div>
+          <div className="site-footer__meta">
+            {t.footer}
+            <CookieSettingsButton className="site-footer__cookies">
+              {t.consent.settings}
+            </CookieSettingsButton>
+          </div>
           <div className="lang-toggle lang-toggle--dark">
             <Link href={pathFor(routeKey, "cs")} hrefLang="cs" className={locale === "cs" ? "is-active" : ""}>
               CS

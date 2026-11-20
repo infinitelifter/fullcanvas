@@ -17,6 +17,11 @@ npx vercel
 
 Or push the repo to GitHub and import it at vercel.com — zero config needed.
 
+Environment variables are listed in `.env.local.example`. Google Analytics 4 and Hotjar
+(`NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_HOTJAR_ID`) load only after the visitor accepts the cookie
+bar (`components/consent.tsx`); "Cookie settings" in the footer reopens it. Without the ids the
+bar doesn't render, so local dev and previews without them aren't tracked.
+
 ## Structure
 
 - `lib/content.ts` — all copy for both languages (i18n dictionary)

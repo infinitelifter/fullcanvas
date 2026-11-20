@@ -124,6 +124,14 @@ export interface ProductCopy {
   alt: string;
 }
 
+export interface ConsentCopy {
+  label: string;
+  text: string;
+  accept: string;
+  reject: string;
+  settings: string;
+}
+
 export interface Content {
   ctaShort: string;
   ctaPrimary: string;
@@ -170,6 +178,7 @@ export interface Content {
   footerTagline: string;
   demo: DemoCopy;
   form: FormCopy;
+  consent: ConsentCopy;
 }
 
 const cs: Content = {
@@ -419,6 +428,13 @@ const cs: Content = {
     invalidEmail: "Zadejte prosím platný e-mail.",
     note: "Žádný newsletter, žádné předávání dat třetím stranám.",
   },
+  consent: {
+    label: "Souhlas s cookies",
+    text: "Google Analytics a Hotjar nám ukazují, jak se web používá, abychom ho mohli zlepšovat. Spustíme je jen s vaším souhlasem.",
+    accept: "Přijmout",
+    reject: "Odmítnout",
+    settings: "Nastavení cookies",
+  },
 };
 
 const en: Content = {
@@ -667,6 +683,13 @@ const en: Content = {
     required: "Please fill in this field.",
     invalidEmail: "Please enter a valid email address.",
     note: "No newsletter, no sharing your data with third parties.",
+  },
+  consent: {
+    label: "Cookie consent",
+    text: "Google Analytics and Hotjar show us how the site is used so we can improve it. They only run if you agree.",
+    accept: "Accept",
+    reject: "Reject",
+    settings: "Cookie settings",
   },
 };
 

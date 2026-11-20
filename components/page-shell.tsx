@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { content } from "@/lib/content";
 import type { Locale } from "@/lib/routes";
 import { BookingProvider } from "@/components/booking";
+import { ConsentManager } from "@/components/consent";
 import Header from "@/components/sections/header";
 import SiteFooter from "@/components/sections/site-footer";
 
@@ -24,6 +25,7 @@ export default function PageShell({
       <Header t={t} locale={locale} routeKey={routeKey} />
       <main>{children}</main>
       <SiteFooter t={t} locale={locale} routeKey={routeKey} />
+      <ConsentManager t={t.consent} />
     </BookingProvider>
   );
 }
