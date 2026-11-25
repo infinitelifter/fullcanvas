@@ -9,6 +9,9 @@ import Faq from "@/components/sections/faq";
 import FinalCta from "@/components/sections/final-cta";
 import { BookButton } from "@/components/booking";
 
+/** Industry pages whose secondary button opens the live demo instead of the booking form. */
+const DEMO_CTA_PAGES = ["hotels", "weddings", "clinics", "car", "realestate"];
+
 /**
  * One template for every entry in lib/services.ts. Section order follows the
  * SEO brief: keyword in H1 and first sentence, TL;DR under the H1, CTA above
@@ -50,7 +53,7 @@ export default function ServicePage({ serviceKey, locale }: { serviceKey: string
           <div className="hero__actions">
             <BookButton className="btn-primary">{t.ctaPrimary}</BookButton>
             {c.ctaSecondary &&
-              (serviceKey === "hotels" ? (
+              (DEMO_CTA_PAGES.includes(serviceKey) ? (
                 <Link href={pathFor("demo", locale)} className="hero__secondary hero__secondary--demo">
                   {c.ctaSecondary}
                 </Link>

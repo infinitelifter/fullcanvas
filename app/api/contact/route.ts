@@ -66,6 +66,9 @@ export async function POST(request: Request) {
   const phone = clean(raw.phone, LIMITS.phone);
   const message = clean(raw.message, LIMITS.message);
   const lang = raw.lang === "en" ? "en" : "cs";
+  // For importing closed deals back into Google Ads as offline conversions.
+  const gclid = clean(raw.gclid, 200);
+  const page = clean(raw.page, 200);
 
   if (!name || !company || !message || !EMAIL_RE.test(email)) {
     return NextResponse.json(
@@ -99,7 +102,9 @@ export async function POST(request: Request) {
     ["E-mail", email],
     ["Telefon / Phone", phone || "—"],
     ["Jazyk / Language", lang.toUpperCase()],
+    ["Stránka / Page", page || "—"],
   ];
+  if (gclid) rows.push(["Google Ads GCLID", gclid]);
 
   const html = `
     <div style="font-family:ui-sans-serif,system-ui,sans-serif;line-height:1.55;color:#26242c">

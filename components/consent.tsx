@@ -3,6 +3,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import Script from "next/script";
 import type { ConsentCopy } from "@/lib/content";
+import { rememberGclid, track } from "@/lib/track";
+import { DEMO_URL } from "@/lib/demo";
 
 type Choice = "granted" | "denied";
 
@@ -58,6 +60,22 @@ export function ConsentManager({ t }: { t: ConsentCopy }) {
     return () => window.removeEventListener(OPEN_EVENT, onOpen);
   }, []);
 
+  // After consent: keep the Google Ads click id for the form, and log clicks
+  // on the demo, e-mail and phone links as secondary conversions.
+  useEffect(() => {
+    if (choice !== "granted") return;
+    rememberGclid();
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.("a");
+      const href = a?.getAttribute("href") ?? "";
+      if (href.startsWith("mailto:")) track("email_click");
+      else if (href.startsWith("tel:")) track("phone_click");
+      else if (href.startsWith(DEMO_URL) || href.endsWith("/demo")) track("demo_open", { link_url: href });
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, [choice]);
+
   if (!TRACKING_ENABLED) return null;
 
   const decide = (next: Choice) => {
@@ -101,7 +119,7 @@ export function ConsentManager({ t }: { t: ConsentCopy }) {
             strategy="afterInteractive"
           />
           <Script id="ga-init" strategy="afterInteractive">
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(GA_ID)});`}
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'denied'});gtag('js',new Date());gtag('config',${JSON.stringify(GA_ID)});`}
           </Script>
         </>
       )}

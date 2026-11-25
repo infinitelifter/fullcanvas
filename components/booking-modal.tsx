@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { Content, Lang } from "@/lib/content";
+import { readGclid, track } from "@/lib/track";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -60,6 +61,7 @@ export default function BookingModal({
   // Remember what to focus on the way back out.
   useEffect(() => {
     if (open) restoreFocusRef.current = document.activeElement as HTMLElement;
+    if (open) track("booking_open");
   }, [open]);
 
   // Lock background scroll without the layout shifting as the scrollbar goes.
@@ -147,9 +149,10 @@ export default function BookingModal({
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, website, lang }),
+        body: JSON.stringify({ ...values, website, lang, gclid: readGclid(), page: window.location.pathname }),
       });
       setStatus(res.ok ? "success" : "error");
+      if (res.ok) track("generate_lead", { form: "booking", lang });
     } catch {
       setStatus("error");
     }

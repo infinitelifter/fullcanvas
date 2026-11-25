@@ -46,12 +46,12 @@ export const PAGE_SEO: Record<string, Record<Locale, { title: string; descriptio
     cs: {
       title: "Full Canvas Digital — AI automatizace pro firmy",
       description:
-        "AI automatizace pro firmy: faktury, e-maily, nabídky, pohledávky. Analýza za pevnou cenu, první výsledek v provozu do 30 dní.",
+        "Odpověď na každou poptávku do minuty, i večer a o víkendu. Faktury, nabídky a interní procesy bez přepisování. Ukázka na vašich datech zdarma.",
     },
     en: {
       title: "AI automation for companies | Full Canvas Digital",
       description:
-        "AI automation for companies: invoices, email, quotes, receivables. A fixed-price assessment and the first result live within 30 days.",
+        "Every inquiry answered within a minute, even at night. Invoices, quotes and internal processes without retyping. Free preview on your own data.",
     },
   },
   demo: {
@@ -209,10 +209,10 @@ export function llmsTxt(): string {
   lines.push(`# ${SITE_NAME}`);
   lines.push("");
   lines.push(
-    "> AI automatizace pro firmy v Česku a na Slovensku: faktury, e-maily a poptávky, cenové nabídky, firemní znalosti, hotely. Analýza za pevnou cenu, první automatizace v provozu do 30 dní.",
+    "> AI automatizace pro firmy v Česku a na Slovensku. Každá poptávka z e-mailu nebo webu dostane do minuty odpověď s cenou nebo volným termínem, i večer a o víkendu. A opakovaná práce v kanceláři (faktury do Pohody a ERP, nabídky, pohledávky, interní procesy) běží sama.",
   );
   lines.push(
-    "> AI automation for companies in Czechia and Slovakia: invoices, email and inquiries, quotes, company knowledge, hotels. Fixed-price assessment, first automation live within 30 days.",
+    "> AI automation for companies in Czechia and Slovakia. Every email or web inquiry gets a reply with a price or a free slot within a minute, evenings and weekends included. Repetitive office work (invoices into Pohoda and ERPs, quotes, receivables, internal processes) runs on its own.",
   );
   lines.push("");
   lines.push(`Kontakt / Contact: ${CONTACT_EMAIL}`);
@@ -235,10 +235,23 @@ export function llmsTxt(): string {
     lines.push(`- [${c.nav}](${urlFor(s.key, "en")}): ${c.description}`);
   }
   lines.push("");
+  lines.push("## Pro koho / Who it is for");
+  lines.push("- Hotely, resorty, penziony a svatební místa: poptávky na pobyty, svatby a firemní akce zodpovězené do minuty v jazyce hosta. / Hotels, resorts and wedding venues.");
+  lines.push("- Soukromé kliniky a zubní ordinace: objednávky z e-mailů a SMS podle pravidel ordinace, schvaluje recepce. / Private and dental clinics.");
+  lines.push("- Autosalony a autoservisy: termín servisu nebo zkušební jízdy nabídnutý z kalendáře. / Car dealers and car services.");
+  lines.push("- Realitní kanceláře: odpověď na ocenění a zájem o nemovitost do pár minut. / Real estate agencies.");
+  lines.push("- Účetní kanceláře a firmy s papírovou agendou: faktury a doklady rovnou do účetnictví. / Accounting firms and back offices.");
+  lines.push("");
   lines.push("## Jak pracujeme / How we work");
-  lines.push("1. Analýza za pevnou cenu (1–2 týdny): spočítá, kolik proces stojí dnes, a seřadí automatizace podle návratnosti.");
-  lines.push("2. Pilot: jedna automatizace v ostrém provozu do 30 dní od schválení.");
-  lines.push("3. Provoz: dohled, vylepšování, další automatizace.");
+  lines.push("1. Ukázka na vašich datech zdarma (do týdne): pár starších poptávek nebo 20 faktur. / Free preview on your own data within a week.");
+  lines.push("2. Pilot: jedna automatizace v ostrém provozu do 30 dní od podpisu, za pevnou cenu. / Pilot live within 30 days, fixed price.");
+  lines.push("3. Provoz: dohled, ladění, další automatizace. / Ongoing operation.");
+  lines.push("");
+  lines.push("## Důležité / Key facts");
+  lines.push("- Na začátku každou odpověď schvaluje člověk; automaticky odchází jen to, co klient povolí. / A person approves every reply at first.");
+  lines.push("- Není to robot místo recepce: rozhodnutí a osobní kontakt zůstávají lidem. / Not a robot receptionist.");
+  lines.push("- Běží na účtech klienta, v EU cloudu nebo v jeho infrastruktuře; data se nepoužívají k trénování. / Runs on the client's own accounts, EU hosting.");
+  lines.push("- Napojení na existující systémy: Pohoda, ERP, Outlook/Microsoft 365, Google, kalendáře, hotelové a rezervační systémy. / Plugs into existing tools.");
   lines.push("");
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
   return lines.join("\n") + "\n";
@@ -280,6 +293,16 @@ export function siteJsonLd(locale: Locale) {
         areaServed: [
           { "@type": "Country", name: "Czech Republic" },
           { "@type": "Country", name: "Slovakia" },
+        ],
+        knowsAbout: [
+          "AI automation",
+          "AI for hotels",
+          "AI reception for clinics",
+          "Automated replies to customer inquiries",
+          "Invoice automation into Pohoda and ERP",
+          "Quote automation",
+          "Business process automation",
+          "AI knowledge base",
         ],
         identifier: {
           "@type": "PropertyValue",

@@ -10,11 +10,19 @@ import { useBooking } from "@/components/booking";
 type ServiceTab = "ai" | "build";
 
 /**
- * Homepage cards → service pages, by position. The five AI cards map to the
- * five service pages in the same order; the comparison page is linked from
- * the footer and the service pages themselves.
+ * Homepage cards → service pages, by position. null = no service page yet;
+ * that card's button opens the booking form instead. The comparison page is
+ * linked from the footer and the service pages themselves.
  */
-const AI_LINKS = ["invoices", "email", "quotes", "hotels", "knowledge"] as const;
+const AI_LINKS: readonly (string | null)[] = [
+  "email", // inquiries
+  "invoices",
+  null, // internal processes
+  "quotes",
+  "hotels",
+  null, // receivables
+  "knowledge",
+];
 
 const DESKTOP_STEP = 300;
 const MOBILE_STEP = 56;
@@ -75,6 +83,7 @@ export default function Services({ t, locale }: { t: Content; locale: Locale }) 
   const hrefFor = (i: number): string | null => {
     if (tab !== "ai") return null;
     const key = AI_LINKS[i];
+    if (!key) return null;
     return SERVICE_ROUTES.some((r) => r.key === key) ? pathFor(key, locale) : null;
   };
 
