@@ -31,6 +31,12 @@ export const OG_IMAGE = {
   height: 630,
 } as const;
 
+/** Homepage preview images, one per language. Bump the ?v= when they change so WhatsApp/Facebook refetch. */
+export const HOME_OG_IMAGES: Record<Locale, { url: string; width: number; height: number }> = {
+  cs: { url: "/og-home-cs.png?v=2", width: 1200, height: 630 },
+  en: { url: "/og-home-en.png?v=2", width: 1200, height: 630 },
+};
+
 export const LOGO_IMAGE = {
   url: "/full-canvas-digital-logo.png",
   width: 512,
@@ -44,14 +50,14 @@ const HTML_LANG: Record<Locale, string> = { cs: "cs-CZ", en: "en-US" };
 export const PAGE_SEO: Record<string, Record<Locale, { title: string; description: string }>> = {
   home: {
     cs: {
-      title: "Full Canvas Digital — AI automatizace pro firmy",
+      title: "Víc zákazníků z poptávek, které už máte | Full Canvas Digital",
       description:
-        "Odpověď na každou poptávku do minuty, i večer a o víkendu. Faktury, nabídky a interní procesy bez přepisování. Ukázka na vašich datech zdarma.",
+        "Odpověď na každou poptávku do minuty, i večer a o víkendu. Termín, orientační cena a připomenutí. Asistent na míru napojený na vaše systémy, lidi nenahrazuje.",
     },
     en: {
-      title: "AI automation for companies | Full Canvas Digital",
+      title: "More customers from the inquiries you already get | Full Canvas Digital",
       description:
-        "Every inquiry answered within a minute, even at night. Invoices, quotes and internal processes without retyping. Free preview on your own data.",
+        "Every inquiry answered within a minute, evenings and weekends too. A time slot, a rough price and a reminder. A custom assistant connected to your systems that doesn't replace your people.",
     },
   },
   demo: {
@@ -89,6 +95,7 @@ export function buildMetadata(key: string, locale: Locale): Metadata {
   const { title, description } = pageSeo(key, locale);
   const path = pathFor(key, locale);
   const canonical = path;
+  const ogImage = key === "home" ? HOME_OG_IMAGES[locale] : OG_IMAGE;
 
   return {
     title,
@@ -104,13 +111,13 @@ export function buildMetadata(key: string, locale: Locale): Metadata {
       description,
       url: canonical,
       locale: OG_LOCALE[locale],
-      images: [{ ...OG_IMAGE, alt: SITE_NAME }],
+      images: [{ ...ogImage, alt: SITE_NAME }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [OG_IMAGE.url],
+      images: [ogImage.url],
     },
   };
 }
